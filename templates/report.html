@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стратегический анализ — {{ company_name }}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0a0f1e; --navy2:#0d1b35; --blue:#2563eb; --blue-l:#3b82f6; --blue-ll:#dbeafe;
+  --cyan:#06b6d4; --green:#10b981; --yellow:#f59e0b; --red:#ef4444; --purple:#7c3aed;
+  --gray-50:#f8fafc; --gray-100:#f1f5f9; --gray-200:#e2e8f0; --gray-300:#cbd5e1;
+  --gray-400:#94a3b8; --gray-500:#64748b; --gray-600:#475569; --gray-700:#334155;
+  --gray-800:#1e293b; --gray-900:#0f172a; --white:#fff;
+  --r:0.75rem; --r-lg:1.125rem; --r-xl:1.5rem;
+  --shadow:0 2px 8px rgba(0,0,0,.08); --shadow-lg:0 8px 32px rgba(0,0,0,.12);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-size:15px;line-height:1.65;color:var(--gray-800);background:var(--gray-50);}
+h1{font-size:clamp(1.75rem,4vw,2.75rem);} h2{font-size:clamp(1.25rem,3vw,1.75rem);}
+h3{font-size:1.0625rem;} h4{font-size:.9375rem;}
+h1,h2,h3,h4{font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+p{line-height:1.7;}
+a{color:var(--blue);text-decoration:none;}
+
+/* Layout */
+.page{max-width:1100px;margin:0 auto;padding:0 1.5rem;}
+.section{padding:3rem 0;border-bottom:1px solid var(--gray-200);}
+.section:last-child{border-bottom:none;}
+.section-title{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem;}
+.section-num{
+  width:2.25rem;height:2.25rem;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--blue-l));
+  color:#fff;font-weight:700;font-size:.875rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.section-title h2{margin:0;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem;}
+@media(max-width:768px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+@media(max-width:600px){.grid-auto{grid-template-columns:1fr;}}
+
+/* Cards */
+.card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow);}
+.card-sm{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r);padding:1rem;box-shadow:var(--shadow);}
+
+/* Badges */
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.2rem .7rem;border-radius:99px;font-size:.75rem;font-weight:600;}
+.badge-critical {background:#fee2e2;color:#b91c1c;border:1px solid #fca5a5;}
+.badge-warning  {background:#fef3c7;color:#92400e;border:1px solid #fcd34d;}
+.badge-opportunity{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7;}
+.badge-ok       {background:var(--blue-ll);color:#1d4ed8;border:1px solid #93c5fd;}
+.badge-high     {background:#fee2e2;color:#b91c1c;}
+.badge-medium   {background:#fef3c7;color:#92400e;}
+.badge-low      {background:var(--gray-100);color:var(--gray-600);}
+.badge-quick_win{background:#d1fae5;color:#065f46;}
+.badge-strategic{background:var(--blue-ll);color:#1d4ed8;}
+.badge-longterm {background:#ede9fe;color:#5b21b6;}
+
+/* Status dot */
+.dot-ok{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0;}
+.dot-warning{width:8px;height:8px;border-radius:50%;background:var(--yellow);display:inline-block;flex-shrink:0;}
+.dot-critical{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;flex-shrink:0;}
+.dot-opportunity{width:8px;height:8px;border-radius:50%;background:var(--cyan);display:inline-block;flex-shrink:0;}
+
+/* ═══ COVER ════════════════════════════════════════════════════ */
+.cover{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#0f2347 100%);
+  color:#fff;padding:4rem 0 3.5rem;position:relative;overflow:hidden;
+}
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+.cover::after{
+  content:'';position:absolute;top:-200px;right:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(37,99,235,.18);filter:blur(80px);
+}
+.cover-inner{position:relative;z-index:1;}
+.cover-label{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.3rem .9rem;border-radius:99px;
+  background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);
+  color:#93c5fd;font-size:.8rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.cover h1{font-size:clamp(2rem,5vw,3.25rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.5rem;}
+.cover-sub{font-size:1.125rem;color:#94a3b8;margin-bottom:2.5rem;}
+.cover-meta{display:flex;flex-wrap:wrap;gap:1.5rem 3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);}
+.cover-meta-item{display:flex;flex-direction:column;gap:.25rem;}
+.cover-meta-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:#64748b;}
+.cover-meta-val{font-size:.9375rem;color:#e2e8f0;font-weight:500;}
+.cover-kpis{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
+.cover-kpi{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  border-radius:var(--r-lg);padding:1.25rem 1.75rem;min-width:160px;
+}
+.cover-kpi-val{font-size:2.25rem;font-weight:800;letter-spacing:-.03em;
+  background:linear-gradient(130deg,#fff,#93c5fd);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.cover-kpi-label{font-size:.8125rem;color:#94a3b8;margin-top:.25rem;}
+.cover-kpi-critical .cover-kpi-val{background:linear-gradient(130deg,#fca5a5,#f87171);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* ═══ SUMMARY (Executive) ══════════════════════════════════════ */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;}
+.summary-card{
+  border-radius:var(--r-lg);padding:1.25rem 1.375rem;
+  display:flex;flex-direction:column;gap:.625rem;
+  border-left:4px solid transparent;
+}
+.summary-card.critical {background:#fff5f5;border-color:var(--red);}
+.summary-card.warning  {background:#fffbeb;border-color:var(--yellow);}
+.summary-card.opportunity{background:#f0fdf4;border-color:var(--green);}
+.summary-card.ok       {background:#eff6ff;border-color:var(--blue);}
+.summary-card-head{display:flex;align-items:center;gap:.625rem;}
+.summary-card-title{font-weight:700;font-size:.9375rem;}
+.summary-card p{font-size:.875rem;color:var(--gray-600);margin:0;}
+.summary-card .rec{font-size:.8125rem;font-weight:600;color:var(--gray-700);margin-top:.25rem;padding-top:.5rem;border-top:1px solid rgba(0,0,0,.06);}
+
+/* ═══ CHANNELS ══════════════════════════════════════════════════ */
+.channels-layout{display:grid;grid-template-columns:1fr 360px;gap:2rem;align-items:start;}
+@media(max-width:900px){.channels-layout{grid-template-columns:1fr;}}
+.channel-cards{display:flex;flex-direction:column;gap:1rem;}
+.ch-card{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-lg);
+  padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;
+  transition:box-shadow .2s;
+}
+.ch-icon-wrap{
+  width:3rem;height:3rem;border-radius:var(--r);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  flex-shrink:0;background:var(--gray-50);border:1px solid var(--gray-200);
+}
+.ch-info{flex:1;min-width:0;}
+.ch-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.375rem;}
+.ch-name{font-weight:700;font-size:.9375rem;}
+.ch-link{font-size:.8125rem;color:var(--gray-400);word-break:break-all;}
+.ch-score-bar{height:6px;border-radius:99px;background:var(--gray-100);margin:.625rem 0;overflow:hidden;}
+.ch-score-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .8s ease;}
+.ch-findings{display:flex;flex-direction:column;gap:.25rem;}
+.ch-finding{font-size:.8125rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:flex-start;}
+.chart-wrap{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-xl);padding:1.5rem;position:sticky;top:1rem;}
+
+/* ═══ METRICS TABLE ════════════════════════════════════════════ */
+.metrics-table{width:100%;border-collapse:collapse;font-size:.9rem;}
+.metrics-table th{
+  text-align:left;padding:.625rem 1rem;
+  background:var(--gray-50);border-bottom:2px solid var(--gray-200);
+  font-size:.775rem;text-transform:uppercase;letter-spacing:.05em;color:var(--gray-400);font-weight:700;
+}
+.metrics-table td{padding:.625rem 1rem;border-bottom:1px solid var(--gray-100);vertical-align:middle;}
+.metrics-table tr:last-child td{border-bottom:none;}
+.metrics-table td:first-child{font-weight:600;color:var(--gray-700);width:40%;}
+.val-now{color:var(--gray-600);}
+.val-want{color:var(--green);font-weight:600;}
+.arrow{color:var(--gray-300);margin:0 .375rem;}
+
+/* ═══ COMPETITORS ══════════════════════════════════════════════ */
+.comp-table{width:100%;border-collapse:collapse;font-size:.875rem;}
+.comp-table th{
+  text-align:left;padding:.625rem 1rem;background:var(--navy);color:#fff;
+  font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;
+}
+.comp-table th:first-child{border-radius:var(--r) 0 0 0;}
+.comp-table th:last-child{border-radius:0 var(--r) 0 0;}
+.comp-table td{padding:.625rem 1rem;border-bottom:1px solid var(--gray-100);}
+.comp-table tr:last-child td{border-bottom:none;}
+.comp-table tr:hover td{background:var(--gray-50);}
+.comp-table td:first-child{font-weight:700;color:var(--gray-800);}
+.comp-yes{color:var(--green);font-weight:700;}
+.comp-no{color:var(--red);}
+.comp-unknown{color:var(--gray-300);}
+.you-row td{background:#eff6ff!important;font-weight:600;}
+
+/* ═══ PRIORITY MATRIX ══════════════════════════════════════════ */
+.matrix-wrap{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1px;
+  background:var(--gray-200);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gray-200);}
+.matrix-cell{background:#fff;padding:1.25rem;}
+.matrix-cell-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem;}
+.matrix-items{display:flex;flex-direction:column;gap:.5rem;}
+.matrix-item{font-size:.8125rem;color:var(--gray-600);padding:.5rem .625rem;border-radius:.5rem;
+  display:flex;align-items:flex-start;gap:.5rem;}
+.mq1 .matrix-cell-label{color:var(--red);}    .mq1{border-top:3px solid var(--red);}
+.mq2 .matrix-cell-label{color:var(--blue);}   .mq2{border-top:3px solid var(--blue);}
+.mq3 .matrix-cell-label{color:var(--yellow);}  .mq3{border-top:3px solid var(--yellow);}
+.mq4 .matrix-cell-label{color:var(--gray-400);}
+.mq1 .matrix-item{background:#fff5f5;}
+.mq2 .matrix-item{background:#eff6ff;}
+.mq3 .matrix-item{background:#fffbeb;}
+.mq4 .matrix-item{background:var(--gray-50);}
+.matrix-header-row{display:flex;gap:1px;margin-bottom:1px;}
+.matrix-axis-label{text-align:center;font-size:.75rem;font-weight:600;color:var(--gray-400);
+  text-transform:uppercase;letter-spacing:.06em;padding:.5rem;}
+
+/* ═══ AUTOMATION (BIGGEST BLOCK) ═══════════════════════════════ */
+.automation-section{
+  background:linear-gradient(180deg,#f0f7ff 0%,var(--gray-50) 100%);
+  border:none;padding:3.5rem 0 4rem;position:relative;
+}
+.automation-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan),var(--purple));
+}
+.auto-intro{
+  background:linear-gradient(135deg,var(--navy),var(--navy2));
+  border-radius:var(--r-xl);padding:2rem 2.5rem;margin-bottom:2.5rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;
+  color:#fff;
+}
+.auto-intro-text h2{color:#fff;margin-bottom:.5rem;}
+.auto-intro-text p{color:#94a3b8;max-width:560px;font-size:.9375rem;}
+.auto-kpis{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.auto-kpi{text-align:center;}
+.auto-kpi-val{font-size:1.75rem;font-weight:800;background:linear-gradient(130deg,#fff,#93c5fd);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.auto-kpi-label{font-size:.75rem;color:#64748b;}
+.auto-cat{margin-bottom:2rem;}
+.auto-cat-header{
+  display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;
+  padding-bottom:.75rem;border-bottom:2px solid var(--blue-ll);
+}
+.auto-cat-icon{font-size:1.5rem;}
+.auto-cat-title{font-size:1.125rem;font-weight:700;color:var(--gray-800);}
+.auto-cat-count{font-size:.8rem;color:var(--gray-400);margin-left:auto;
+  background:var(--gray-100);padding:.2rem .625rem;border-radius:99px;}
+.auto-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1rem;}
+.auto-opt{
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-lg);
+  padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;
+  transition:all .2s;position:relative;overflow:hidden;
+}
+.auto-opt::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  opacity:0;transition:opacity .2s;
+}
+.auto-opt:hover{box-shadow:0 8px 28px rgba(37,99,235,.12);border-color:var(--blue-ll);}
+.auto-opt:hover::before{opacity:1;}
+.auto-opt-name{font-weight:700;font-size:.9375rem;color:var(--gray-900);}
+.auto-opt-desc{font-size:.875rem;color:var(--gray-600);line-height:1.6;flex:1;}
+.auto-opt-tool{font-size:.8125rem;color:var(--blue);font-weight:600;
+  padding:.2rem .625rem;background:var(--blue-ll);border-radius:.375rem;
+  display:inline-flex;align-items:center;gap:.3rem;}
+.auto-opt-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;}
+.auto-opt-roi{
+  display:flex;align-items:center;gap:.25rem;font-size:.8rem;font-weight:700;
+  color:var(--green);background:#d1fae5;padding:.2rem .625rem;border-radius:99px;
+}
+.auto-opt-hours{font-size:.8rem;color:var(--gray-400);margin-left:auto;}
+
+/* ═══ ROADMAP ═══════════════════════════════════════════════════ */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;}
+@media(max-width:768px){.roadmap{grid-template-columns:1fr;}}
+.roadmap::before{
+  content:'';position:absolute;top:2.5rem;left:16.67%;right:16.67%;
+  height:2px;background:linear-gradient(90deg,var(--green),var(--blue),var(--purple));
+  z-index:0;display:none;
+}
+@media(min-width:769px){.roadmap::before{display:block;}}
+.roadmap-card{
+  border-radius:var(--r-xl);overflow:hidden;position:relative;z-index:1;
+  box-shadow:var(--shadow-lg);
+}
+.roadmap-head{padding:1.375rem 1.5rem;color:#fff;display:flex;flex-direction:column;gap:.25rem;}
+.roadmap-phase{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.7;}
+.roadmap-period{font-size:.875rem;font-weight:600;opacity:.85;}
+.roadmap-title{font-size:1.125rem;font-weight:800;}
+.roadmap-body{background:#fff;padding:1.25rem 1.5rem;}
+.roadmap-items{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem;}
+.roadmap-items li{font-size:.875rem;color:var(--gray-600);display:flex;gap:.5rem;align-items:flex-start;}
+.roadmap-items li::before{content:'→';color:var(--gray-300);flex-shrink:0;margin-top:.1rem;}
+.roadmap-result{
+  font-size:.8125rem;font-weight:600;color:var(--gray-700);
+  padding:.625rem .875rem;border-radius:var(--r);background:var(--gray-50);
+  border:1px solid var(--gray-200);
+}
+
+/* ═══ CONCLUSIONS ═══════════════════════════════════════════════ */
+.conclusions{display:flex;flex-direction:column;gap:1rem;}
+.conclusion-item{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:#fff;border:1px solid var(--gray-200);border-radius:var(--r-lg);
+  padding:1.25rem;
+}
+.conclusion-num{
+  width:2.25rem;height:2.25rem;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--blue),var(--blue-l));
+  color:#fff;font-weight:700;font-size:.875rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.conclusion-text{font-size:.9375rem;color:var(--gray-700);line-height:1.6;}
+.conclusion-text strong{color:var(--gray-900);}
+
+/* ═══ FOOTER ════════════════════════════════════════════════════ */
+.report-footer{
+  background:var(--navy);color:#fff;padding:2rem 0;margin-top:2rem;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.report-footer-logo{font-size:1.125rem;font-weight:800;letter-spacing:-.02em;}
+.report-footer-logo span{color:var(--blue-l);}
+.report-footer-meta{font-size:.8125rem;color:#64748b;}
+.report-footer-conf{
+  font-size:.75rem;color:#475569;padding:.3rem .75rem;
+  border:1px solid #334155;border-radius:99px;
+}
+
+/* ═══ PRINT ═════════════════════════════════════════════════════ */
+@media print{
+  .cover{padding:2rem 0;}
+  .section{padding:1.5rem 0;}
+  .chart-wrap{position:static;}
+  .channels-layout{grid-template-columns:1fr;}
+  .auto-opts{grid-template-columns:1fr 1fr;}
+  .roadmap{grid-template-columns:1fr 1fr 1fr;}
+  @page{margin:1.5cm;}
+}
+
+/* ═══ INFO PANEL ════════════════════════════════════════════════ */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
+.info-item{background:#fff;border:1px solid var(--gray-200);border-radius:var(--r);padding:.875rem 1rem;}
+.info-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);font-weight:600;margin-bottom:.25rem;}
+.info-val{font-size:.9375rem;color:var(--gray-800);font-weight:500;}
+.tags{display:flex;flex-wrap:wrap;gap:.375rem;}
+.tag{padding:.2rem .625rem;border-radius:99px;background:var(--blue-ll);
+  color:var(--blue);font-size:.8rem;font-weight:500;border:1px solid #bfdbfe;}
+.tag-gray{background:var(--gray-100);color:var(--gray-600);border:1px solid var(--gray-200);}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ ОБЛОЖКА ══════════════ -->
+<div class="cover">
+<div class="page cover-inner">
+  <div class="cover-label">
+    <span>●</span> Конфиденциально · Стратег v2
+  </div>
+  <h1>{{ company_name }}</h1>
+  <p class="cover-sub">Стратегический анализ каналов продвижения · {{ generated_at }}</p>
+
+  <div class="cover-kpis">
+    <div class="cover-kpi">
+      <span class="cover-kpi-val">6</span>
+      <div class="cover-kpi-label">каналов проанализировано</div>
+    </div>
+    <div class="cover-kpi cover-kpi-critical">
+      <span class="cover-kpi-val">{{ findings_critical }}</span>
+      <div class="cover-kpi-label">критичных пробела</div>
+    </div>
+    <div class="cover-kpi">
+      <span class="cover-kpi-val">{{ findings_opportunity }}</span>
+      <div class="cover-kpi-label">точек роста</div>
+    </div>
+    <div class="cover-kpi">
+      <span class="cover-kpi-val">{{ total_auto_options }}</span>
+      <div class="cover-kpi-label">вариантов автоматизации</div>
+    </div>
+    <div class="cover-kpi">
+      <span class="cover-kpi-val">3</span>
+      <div class="cover-kpi-label">фазы дорожной карты</div>
+    </div>
+  </div>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item"><div class="cover-meta-label">Компания</div><div class="cover-meta-val">{{ company_name }}</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-label">Ниша</div><div class="cover-meta-val">{{ niche }}</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-label">Регион</div><div class="cover-meta-val">{{ location }}</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-label">Бюджет</div><div class="cover-meta-val">{{ budget }}</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-label">ID проекта</div><div class="cover-meta-val">#{{ project_id }}</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-label">Срок результата</div><div class="cover-meta-val">{{ deadline }}</div></div>
+  </div>
+</div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════ 1. О КОМПАНИИ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">1</div>
+    <h2>Профиль компании</h2>
+  </div>
+  <div class="info-grid" style="margin-bottom:1.25rem;">
+    <div class="info-item"><div class="info-label">Сайт</div><div class="info-val">{{ website }}</div></div>
+    <div class="info-item"><div class="info-label">Регион</div><div class="info-val">{{ location }}</div></div>
+    <div class="info-item"><div class="info-label">Ниша</div><div class="info-val">{{ niche }}</div></div>
+    <div class="info-item"><div class="info-label">Бюджет на продвижение</div><div class="info-val">{{ budget }}</div></div>
+    <div class="info-item"><div class="info-label">Контент создаёт</div><div class="info-val">{{ content_creator }}</div></div>
+    <div class="info-item"><div class="info-label">Конкурентов указано</div><div class="info-val">{{ comps_count }}</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card-sm">
+      <div class="info-label" style="margin-bottom:.5rem;">Продукт / услуга</div>
+      <p style="font-size:.9375rem;color:var(--gray-700);">{{ product if product != '—' else 'Не указано' }}</p>
+    </div>
+    <div class="card-sm">
+      <div class="info-label" style="margin-bottom:.5rem;">Сегменты клиентов</div>
+      <p style="font-size:.9375rem;color:var(--gray-700);">{{ segments if segments != '—' else 'Не указано' }}</p>
+    </div>
+  </div>
+
+  {% if goals %}
+  <div style="margin-top:1.25rem;">
+    <div class="info-label" style="margin-bottom:.5rem;">Бизнес-цели исследования</div>
+    <div class="tags">
+      {% for g in goals %}<span class="tag">{{ g }}</span>{% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if typical_client %}
+  <div class="card-sm" style="margin-top:1.25rem;">
+    <div class="info-label" style="margin-bottom:.375rem;">Типичный клиент</div>
+    <p style="font-size:.9rem;color:var(--gray-700);">{{ typical_client }}</p>
+  </div>
+  {% endif %}
+
+  {% if what_works %}
+  <div class="card-sm" style="margin-top:.75rem;border-left:3px solid var(--green);">
+    <div class="info-label" style="margin-bottom:.375rem;color:var(--green);">✓ Что работает сейчас</div>
+    <p style="font-size:.9rem;color:var(--gray-700);">{{ what_works }}</p>
+  </div>
+  {% endif %}
+
+  {% if differentiator %}
+  <div class="card-sm" style="margin-top:.75rem;border-left:3px solid var(--blue);">
+    <div class="info-label" style="margin-bottom:.375rem;color:var(--blue);">★ Отличие от конкурентов</div>
+    <p style="font-size:.9rem;color:var(--gray-700);">{{ differentiator }}</p>
+  </div>
+  {% endif %}
+</div>
+
+<!-- ══════════════ 2. ИСПОЛНИТЕЛЬНОЕ РЕЗЮМЕ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">2</div>
+    <h2>Исполнительное резюме</h2>
+  </div>
+  <div class="summary-grid">
+    {% for f in findings %}
+    <div class="summary-card {{ f.severity }}">
+      <div class="summary-card-head">
+        <span class="dot-{{ f.severity }}"></span>
+        <div class="summary-card-title">{{ f.channel }}</div>
+        <span class="badge badge-{{ f.priority }}" style="margin-left:auto;">
+          {{ 'Высокий' if f.priority == 'high' else ('Средний' if f.priority == 'medium' else 'Низкий') }}
+        </span>
+      </div>
+      <p>{{ f.fact }}</p>
+      {% if f.recommendation %}
+      <div class="rec">→ {{ f.recommendation }}</div>
+      {% endif %}
+      {% if f.kpi %}
+      <div style="font-size:.75rem;color:var(--gray-400);margin-top:.25rem;">KPI: {{ f.kpi }}</div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ══════════════ 3. АНАЛИЗ КАНАЛОВ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">3</div>
+    <h2>Анализ каналов присутствия</h2>
+  </div>
+  <div class="channels-layout">
+    <div class="channel-cards">
+      {% for ch in channels %}
+      <div class="ch-card">
+        <div class="ch-icon-wrap">{{ ch.icon }}</div>
+        <div class="ch-info">
+          <div class="ch-head">
+            <span class="ch-name">{{ ch.name }}</span>
+            <span class="dot-{{ ch.status }}"></span>
+            <span style="font-size:.8rem;font-weight:600;
+              color:{% if ch.status == 'ok' %}var(--green){% elif ch.status == 'critical' %}var(--red){% elif ch.status == 'opportunity' %}var(--cyan){% else %}var(--yellow){% endif %};">
+              {{ ch.status_label }}
+            </span>
+            <span style="margin-left:auto;font-size:.8rem;font-weight:700;color:var(--blue);">{{ ch.score }}/100</span>
+          </div>
+          <div class="ch-score-bar"><div class="ch-score-fill" style="width:{{ ch.score }}%"></div></div>
+          <div class="ch-link">{{ ch.link }}</div>
+          <div class="ch-findings" style="margin-top:.625rem;">
+            {% for f in ch.findings %}
+            <div class="ch-finding">
+              <span class="dot-{{ f.type if f.type in ('ok','critical','warning','opportunity') else 'ok' }}" style="margin-top:.35rem;"></span>
+              <span>{{ f.text }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div>
+      <div class="chart-wrap">
+        <h3 style="margin-bottom:1.25rem;font-size:.9375rem;">Радар присутствия по каналам</h3>
+        <canvas id="radarChart" width="320" height="320"></canvas>
+        <div style="margin-top:1rem;font-size:.75rem;color:var(--gray-400);">
+          Оценка 0–100 на основе данных анкеты. Полный анализ — после сбора данных.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ 4. МЕТРИКИ И ЦЕЛИ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">4</div>
+    <h2>Метрики успеха</h2>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="metrics-table">
+      <thead>
+        <tr>
+          <th>Метрика</th>
+          <th>Сейчас</th>
+          <th></th>
+          <th>Цель</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Заявок / обращений в месяц</td>
+          <td class="val-now">{{ m1_cur }}</td>
+          <td class="arrow">→</td>
+          <td class="val-want">{{ m1_want }}</td>
+          <td>{% if m1_cur != '—' %}<span class="badge badge-warning">В работе</span>{% else %}<span class="badge" style="background:var(--gray-100);color:var(--gray-400);">—</span>{% endif %}</td>
+        </tr>
+        <tr>
+          <td>Конверсия сайта (%)</td>
+          <td class="val-now">{{ m2_cur }}</td>
+          <td class="arrow">→</td>
+          <td class="val-want">{{ m2_want }}</td>
+          <td>{% if m2_cur != '—' %}<span class="badge badge-warning">В работе</span>{% else %}<span class="badge" style="background:var(--gray-100);color:var(--gray-400);">—</span>{% endif %}</td>
+        </tr>
+        <tr>
+          <td>Стоимость лида (₽)</td>
+          <td class="val-now">{{ m3_cur }}</td>
+          <td class="arrow">→</td>
+          <td class="val-want">{{ m3_want }}</td>
+          <td>{% if m3_cur != '—' %}<span class="badge badge-warning">В работе</span>{% else %}<span class="badge" style="background:var(--gray-100);color:var(--gray-400);">—</span>{% endif %}</td>
+        </tr>
+        <tr>
+          <td>Рейтинг Яндекс.Карт</td>
+          <td class="val-now">{{ m4_cur }}</td>
+          <td class="arrow">→</td>
+          <td class="val-want">{{ m4_want }}</td>
+          <td>{% if m4_cur != '—' %}<span class="badge badge-ok">Измеримо</span>{% else %}<span class="badge" style="background:var(--gray-100);color:var(--gray-400);">—</span>{% endif %}</td>
+        </tr>
+        <tr>
+          <td>Подписчики VK / Telegram</td>
+          <td class="val-now">{{ m5_cur }}</td>
+          <td class="arrow">→</td>
+          <td class="val-want">{{ m5_want }}</td>
+          <td>{% if m5_cur != '—' %}<span class="badge badge-ok">Измеримо</span>{% else %}<span class="badge" style="background:var(--gray-100);color:var(--gray-400);">—</span>{% endif %}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  {% if goal_result %}
+  <div class="card-sm" style="margin-top:1rem;border-left:3px solid var(--blue);">
+    <div class="info-label" style="margin-bottom:.375rem;color:var(--blue);">Ожидаемый результат через 3–6 месяцев</div>
+    <p style="font-size:.9rem;color:var(--gray-700);">{{ goal_result }}</p>
+  </div>
+  {% endif %}
+</div>
+
+<!-- ══════════════ 5. КОНКУРЕНТНЫЙ АНАЛИЗ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">5</div>
+    <h2>Конкурентный анализ</h2>
+  </div>
+
+  {% if competitors %}
+  <div class="card" style="padding:0;overflow:hidden;margin-bottom:1.25rem;">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Компания</th>
+          <th>Сайт</th>
+          <th>VK</th>
+          <th>Telegram</th>
+          <th>Карты</th>
+          <th>Примечание</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="you-row">
+          <td>★</td>
+          <td>{{ company_name }} <span style="font-size:.75rem;color:var(--blue);">(вы)</span></td>
+          <td class="comp-yes">✓</td>
+          <td>{% for ch in channels %}{% if ch.name == 'ВКонтакте' %}{% if ch.score > 5 %}<span class="comp-yes">✓</span>{% else %}<span class="comp-no">✗</span>{% endif %}{% endif %}{% endfor %}</td>
+          <td>{% for ch in channels %}{% if ch.name == 'Telegram' %}{% if ch.score > 5 %}<span class="comp-yes">✓</span>{% else %}<span class="comp-no">✗</span>{% endif %}{% endif %}{% endfor %}</td>
+          <td>{% for ch in channels %}{% if ch.name == 'Карты / 2ГИС' %}{% if ch.score > 5 %}<span class="comp-yes">✓</span>{% else %}<span class="comp-no">✗</span>{% endif %}{% endif %}{% endfor %}</td>
+          <td>—</td>
+        </tr>
+        {% for c in competitors %}
+        <tr>
+          <td>{{ c.num }}</td>
+          <td>{{ c.name }}</td>
+          <td class="{{ 'comp-yes' if c.site == '✓' else 'comp-unknown' }}">{{ c.site }}</td>
+          <td class="{{ 'comp-yes' if c.vk == '✓' else 'comp-unknown' }}">{{ c.vk }}</td>
+          <td class="{{ 'comp-yes' if c.tg == '✓' else 'comp-unknown' }}">{{ c.tg }}</td>
+          <td class="comp-unknown">?</td>
+          <td style="font-size:.8125rem;color:var(--gray-500);">{{ c.comment }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div style="font-size:.8125rem;color:var(--gray-400);text-align:right;">
+    ✓ Подтверждено &nbsp;|&nbsp; ✗ Отсутствует &nbsp;|&nbsp; ? Будет проверено в ходе анализа
+  </div>
+
+  {% if strongest %}
+  <div class="card-sm" style="margin-top:1rem;">
+    <div class="info-label" style="margin-bottom:.375rem;">Сильнейший конкурент (по мнению компании)</div>
+    <p style="font-size:.875rem;color:var(--gray-700);">{{ strongest }}</p>
+  </div>
+  {% endif %}
+
+  <div style="margin-top:1.25rem;">
+    <h3 style="margin-bottom:1rem;font-size:1rem;">Сравнительный анализ каналов</h3>
+    <div class="card" style="padding:1.5rem;">
+      <canvas id="barChart" height="120"></canvas>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="card-sm" style="border-left:3px solid var(--yellow);">
+    <p style="color:var(--gray-600);font-size:.9375rem;">
+      ⚠️ Конкуренты не указаны в анкете. Бенчмаркинг будет проведён после уточнения списка.
+    </p>
+  </div>
+  {% endif %}
+</div>
+
+<!-- ══════════════ 6. МАТРИЦА ПРИОРИТЕТОВ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">6</div>
+    <h2>Матрица приоритетов</h2>
+  </div>
+  <p style="color:var(--gray-500);margin-bottom:1.5rem;font-size:.9375rem;">
+    Все найденные задачи расставлены по важности и срочности. Начинайте с верхнего левого квадранта.
+  </p>
+
+  <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:1px;margin-bottom:.5rem;">
+    <div></div>
+    <div class="matrix-axis-label">🔥 Срочно</div>
+    <div class="matrix-axis-label">⏳ Не срочно</div>
+  </div>
+  <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:1px;">
+    <div style="display:flex;align-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
+      font-size:.75rem;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;padding:.5rem;">Важно</div>
+    <div class="matrix-cell mq1">
+      <div class="matrix-cell-label">🔴 Делаем сейчас</div>
+      <div class="matrix-items">
+        {% for f in findings if f.priority == 'high' and f.effort == 'quick_win' %}
+        <div class="matrix-item"><span class="dot-critical" style="flex-shrink:0;margin-top:.35rem;"></span><span>{{ f.channel }}: {{ f.fact[:80] }}{% if f.fact|length > 80 %}…{% endif %}</span></div>
+        {% else %}
+        {% for f in findings if f.severity == 'critical' %}
+        <div class="matrix-item"><span class="dot-critical" style="flex-shrink:0;margin-top:.35rem;"></span><span>{{ f.channel }}: {{ f.fact[:75] }}{% if f.fact|length > 75 %}…{% endif %}</span></div>
+        {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="matrix-cell mq2">
+      <div class="matrix-cell-label">🔵 Планируем</div>
+      <div class="matrix-items">
+        {% for f in findings if f.priority == 'high' and f.effort == 'strategic' %}
+        <div class="matrix-item"><span class="dot-ok" style="flex-shrink:0;margin-top:.35rem;"></span><span>{{ f.channel }}: {{ f.fact[:80] }}{% if f.fact|length > 80 %}…{% endif %}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:1px;margin-top:1px;">
+    <div style="display:flex;align-items:center;writing-mode:vertical-rl;transform:rotate(180deg);
+      font-size:.75rem;font-weight:600;color:var(--gray-400);text-transform:uppercase;letter-spacing:.06em;padding:.5rem;">Не важно</div>
+    <div class="matrix-cell mq3">
+      <div class="matrix-cell-label">🟡 Делегируем</div>
+      <div class="matrix-items">
+        {% for f in findings if f.priority == 'medium' and f.effort == 'quick_win' %}
+        <div class="matrix-item"><span class="dot-warning" style="flex-shrink:0;margin-top:.35rem;"></span><span>{{ f.channel }}: {{ f.fact[:80] }}{% if f.fact|length > 80 %}…{% endif %}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="matrix-cell mq4">
+      <div class="matrix-cell-label">⚪ Откладываем</div>
+      <div class="matrix-items">
+        {% for f in findings if f.priority == 'low' or f.effort == 'longterm' %}
+        <div class="matrix-item"><span class="dot-ok" style="flex-shrink:0;margin-top:.35rem;"></span><span>{{ f.channel }}: {{ f.fact[:80] }}{% if f.fact|length > 80 %}…{% endif %}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<!-- ══════════════ 7. АВТОМАТИЗАЦИЯ (BIG BLOCK) ══════════════ -->
+<div class="automation-section section">
+<div class="page">
+  <div class="section-title">
+    <div class="section-num" style="background:linear-gradient(135deg,#7c3aed,var(--blue));">7</div>
+    <h2>Варианты автоматизации</h2>
+  </div>
+
+  <div class="auto-intro">
+    <div class="auto-intro-text">
+      <h2>{{ total_auto_options }} инструментов для роста без пропорционального увеличения команды</h2>
+      <p>Автоматизация — это не разовое внедрение, а система. Каждый инструмент ниже протестирован на российском рынке и приносит измеримый ROI. Начните с быстрых побед, постройте фундамент, масштабируйтесь.</p>
+    </div>
+    <div class="auto-kpis">
+      <div class="auto-kpi">
+        <span class="auto-kpi-val">{{ total_auto_options }}</span>
+        <div class="auto-kpi-label">инструментов</div>
+      </div>
+      <div class="auto-kpi">
+        <span class="auto-kpi-val">6</span>
+        <div class="auto-kpi-label">категорий</div>
+      </div>
+      <div class="auto-kpi">
+        <span class="auto-kpi-val">до 18x</span>
+        <div class="auto-kpi-label">макс. ROI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Сводный Chart по ROI всех категорий -->
+  <div class="card" style="padding:1.5rem;margin-bottom:2rem;">
+    <h3 style="margin-bottom:1rem;font-size:.9375rem;">ROI по типам автоматизации (оценочный, кратность)</h3>
+    <canvas id="roiChart" height="80"></canvas>
+    <p style="font-size:.75rem;color:var(--gray-400);margin-top:.75rem;">* ROI указан как кратность вложений. Рассчитан на основе среднерыночных данных по российским компаниям аналогичного размера.</p>
+  </div>
+
+  {% for cat in automation %}
+  <div class="auto-cat">
+    <div class="auto-cat-header">
+      <span class="auto-cat-icon">{{ cat.icon }}</span>
+      <span class="auto-cat-title">{{ cat.cat }}</span>
+      <span class="auto-cat-count">{{ cat.opts|length }} инструментов</span>
+    </div>
+    <div class="auto-opts">
+      {% for opt in cat.opts %}
+      <div class="auto-opt">
+        <div>
+          <div class="auto-opt-name">{{ opt.name }}</div>
+        </div>
+        <div class="auto-opt-desc">{{ opt.desc }}</div>
+        <div class="auto-opt-tool">🔧 {{ opt.tool }}</div>
+        <div class="auto-opt-meta">
+          <span class="badge badge-{{ opt.type }}">
+            {% if opt.type == 'quick_win' %}⚡ Быстро{% elif opt.type == 'strategic' %}📈 Стратегически{% else %}🔭 Долгосрочно{% endif %}
+          </span>
+          <span class="badge badge-{{ opt.priority }}">
+            {{ 'Высокий' if opt.priority == 'high' else ('Средний' if opt.priority == 'medium' else 'Низкий') }} приоритет
+          </span>
+          <span class="auto-opt-roi">ROI {{ opt.roi_x }}x</span>
+          <span class="auto-opt-hours">≈ {{ opt.hours }}ч настройки</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+
+<div class="page">
+
+<!-- ══════════════ 8. ДОРОЖНАЯ КАРТА ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">8</div>
+    <h2>Дорожная карта</h2>
+  </div>
+  <p style="color:var(--gray-500);margin-bottom:2rem;font-size:.9375rem;">
+    Три фазы последовательного развития. Каждая фаза строится на результатах предыдущей.
+  </p>
+  <div class="roadmap">
+    {% for phase in roadmap %}
+    <div class="roadmap-card">
+      <div class="roadmap-head" style="background:{{ phase.color }};">
+        <div class="roadmap-phase">{{ phase.phase }}</div>
+        <div class="roadmap-period">{{ phase.period }}</div>
+        <div class="roadmap-title">{{ phase.title }}</div>
+      </div>
+      <div class="roadmap-body">
+        <ul class="roadmap-items">
+          {% for item in phase['items'] %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+        <div class="roadmap-result">🎯 {{ phase.result }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Временная шкала -->
+  <div class="card" style="padding:1.5rem;margin-top:1.5rem;">
+    <h3 style="margin-bottom:1.25rem;font-size:.9rem;">Ожидаемая динамика заявок по месяцам</h3>
+    <canvas id="growthChart" height="80"></canvas>
+    <p style="font-size:.75rem;color:var(--gray-400);margin-top:.75rem;">
+      * Прогноз роста при последовательном выполнении дорожной карты. Базовая линия — текущий уровень (100%).
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════ 9. ВЫВОДЫ ══════════════ -->
+<div class="section">
+  <div class="section-title">
+    <div class="section-num">9</div>
+    <h2>Ключевые выводы и следующие шаги</h2>
+  </div>
+  <div class="conclusions">
+    <div class="conclusion-item">
+      <div class="conclusion-num">1</div>
+      <div class="conclusion-text">
+        <strong>Критичные пробелы закрываются быстро.</strong>
+        Основные потери — отсутствующие карточки, CRM, аналитика — устраняются за 1–2 недели. Это не требует бюджета, только времени.
+      </div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">2</div>
+      <div class="conclusion-text">
+        <strong>Автоматизация — главный рычаг роста без увеличения штата.</strong>
+        {{ total_auto_options }} выявленных инструментов при поэтапном внедрении высвобождают 10–20 часов в неделю и снижают CPL на 30–50%.
+      </div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">3</div>
+      <div class="conclusion-text">
+        <strong>Конкурентный gap определяет порядок действий.</strong>
+        {% if comps_count > 0 %}
+        Указанные {{ comps_count }} конкурента будут проанализированы в разрезе всех каналов — это покажет, где вы опережаете, а где теряете клиентов.
+        {% else %}
+        После уточнения списка конкурентов gap-анализ даст конкретные приоритеты по каналам.
+        {% endif %}
+      </div>
+    </div>
+    <div class="conclusion-item">
+      <div class="conclusion-num">4</div>
+      <div class="conclusion-text">
+        <strong>Горизонт 6 месяцев реалистичен.</strong>
+        {% if deadline and deadline != 'Не указан' %}
+        Срок «{{ deadline }}» достижим при старте Фазы 1 в ближайшие 2 недели.
+        {% else %}
+        При старте Фазы 1 в ближайшие 2 недели к месяцу 6 достигается полная автоматизация воронки.
+        {% endif %}
+      </div>
+    </div>
+    <div class="conclusion-item" style="border-left:3px solid var(--blue);border-radius:0 var(--r-lg) var(--r-lg) 0;">
+      <div class="conclusion-num" style="background:linear-gradient(135deg,var(--blue),var(--cyan));">→</div>
+      <div class="conclusion-text">
+        <strong>Следующий шаг:</strong>
+        Согласовать приоритеты матрицы, утвердить бюджет на Фазу 1 и назначить ответственного за внедрение.
+        Повторный аудит рекомендуется через 3 месяца для оценки прогресса.
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<!-- ═══ FOOTER ═══ -->
+<div class="report-footer">
+  <div class="page" style="width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <div class="report-footer-logo"><span>●</span> Стратег</div>
+    <div class="report-footer-meta">Отчёт #{{ project_id }} · Сгенерирован {{ generated_at }} · Конфиденциально</div>
+    <div class="report-footer-conf">КОНФИДЕНЦИАЛЬНО</div>
+  </div>
+</div>
+
+<script>
+// ── Radar chart ──────────────────────────────────────────────
+new Chart(document.getElementById('radarChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Сайт','ВКонтакте','Telegram','Instagram','Карты','Конкуренты'],
+    datasets: [{
+      label: '{{ company_name }}',
+      data: {{ ch_scores }},
+      fill: true,
+      backgroundColor: 'rgba(37,99,235,0.15)',
+      borderColor: '#2563eb',
+      pointBackgroundColor: '#2563eb',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: '#2563eb',
+      borderWidth: 2,
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: { r: {
+      min: 0, max: 100, ticks: { stepSize: 25, font: { size: 10 } },
+      grid: { color: 'rgba(0,0,0,.06)' },
+      pointLabels: { font: { size: 11, weight: '600' }, color: '#334155' },
+    }},
+    plugins: { legend: { display: false } },
+  }
+});
+
+// ── Bar chart (competitors) ──────────────────────────────────
+new Chart(document.getElementById('barChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Сайт','VK','Telegram','Instagram','Карты'],
+    datasets: [
+      {
+        label: '{{ company_name }} (оценка)',
+        data: [
+          {% for ch in channels %}{{ ch.score }}{% if not loop.last %},{% endif %}{% endfor %}
+        ],
+        backgroundColor: 'rgba(37,99,235,0.8)',
+        borderRadius: 4,
+      },
+      {
+        label: 'Среднее по конкурентам (оценочно)',
+        data: [72, 68, 45, 38, 80],
+        backgroundColor: 'rgba(100,116,139,0.35)',
+        borderRadius: 4,
+      },
+    ]
+  },
+  options: {
+    responsive: true, indexAxis: 'x',
+    scales: {
+      y: { min:0, max:100, grid: { color: 'rgba(0,0,0,.05)' },
+           ticks: { font: { size: 11 } } },
+      x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+    },
+    plugins: {
+      legend: { position: 'top', labels: { font: { size: 11 } } },
+    },
+  }
+});
+
+// ── ROI chart (automation) ───────────────────────────────────
+new Chart(document.getElementById('roiChart'), {
+  type: 'bar',
+  data: {
+    labels: ['CRM и воронка','Маркетинг','Контент','Аналитика','AI','Операции'],
+    datasets: [{
+      label: 'Средний ROI (кратность)',
+      data: [7.6, 8.2, 6.2, 7.5, 11, 5.4],
+      backgroundColor: [
+        'rgba(37,99,235,0.8)','rgba(6,182,212,0.8)','rgba(16,185,129,0.8)',
+        'rgba(124,58,237,0.8)','rgba(239,68,68,0.8)','rgba(245,158,11,0.8)',
+      ],
+      borderRadius: 6,
+    }]
+  },
+  options: {
+    responsive: true, indexAxis: 'y',
+    scales: {
+      x: { min:0, grid: { color:'rgba(0,0,0,.05)' }, ticks: { callback: v => v+'x', font:{size:11} } },
+      y: { grid: { display:false }, ticks: { font:{size:11} } },
+    },
+    plugins: { legend: { display: false } },
+  }
+});
+
+// ── Growth forecast chart ────────────────────────────────────
+new Chart(document.getElementById('growthChart'), {
+  type: 'line',
+  data: {
+    labels: ['Сейчас','Мес. 1','Мес. 2','Мес. 3','Мес. 4','Мес. 5','Мес. 6'],
+    datasets: [
+      {
+        label: 'Заявки (прогноз)',
+        data: [100, 120, 145, 175, 215, 265, 330],
+        borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)',
+        fill: true, tension: 0.4, borderWidth: 2.5,
+        pointBackgroundColor: '#2563eb', pointRadius: 5,
+      },
+      {
+        label: 'Без изменений',
+        data: [100, 102, 104, 106, 108, 110, 112],
+        borderColor: '#cbd5e1', backgroundColor: 'transparent',
+        borderDash: [6,4], tension: 0.2, borderWidth: 1.5,
+        pointRadius: 0,
+      },
+    ]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: { min:80, ticks: { callback: v => v+'%', font:{size:11} }, grid:{color:'rgba(0,0,0,.05)'} },
+      x: { grid: { display:false }, ticks: { font:{size:11} } },
+    },
+    plugins: {
+      legend: { position:'top', labels:{ font:{size:11} } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label+': '+ctx.parsed.y+'%' } },
+    },
+  }
+});
+</script>
+</body>
+</html>

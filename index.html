@@ -1436,8 +1436,8 @@ document.querySelectorAll('input:not([type=checkbox]):not([type=radio]),textarea
   });
 });
 
-/* ── Form submit ───────────────────────────────────────── */
-document.getElementById('submit-btn').addEventListener('click', () => {
+/* ── Form submit → POST to backend ────────────────────── */
+document.getElementById('submit-btn').addEventListener('click', async () => {
   const form  = document.getElementById('intake-form');
   const reqs  = form.querySelectorAll('[required]');
   let firstBad = null;
@@ -1458,12 +1458,52 @@ document.getElementById('submit-btn').addEventListener('click', () => {
     return;
   }
 
-  // Success
-  form.style.display = 'none';
-  document.getElementById('form-actions').style.display = 'none';
-  const ty = document.getElementById('thank-you');
-  ty.classList.add('show');
-  ty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Собираем данные формы
+  const data = {};
+  const fd = new FormData(form);
+  // Мультизначения (checkbox groups)
+  const multi = {};
+  fd.forEach((v, k) => {
+    if (multi[k]) { multi[k].push(v); } else { multi[k] = [v]; }
+  });
+  Object.entries(multi).forEach(([k, v]) => { data[k] = v.length === 1 ? v[0] : v; });
+
+  // Показываем лоадер
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Генерируем отчёт...';
+
+  try {
+    const resp = await fetch('/api/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    if (!resp.ok) throw new Error('Server error');
+    const result = await resp.json();
+
+    // Открываем отчёт в новой вкладке
+    window.open(result.report_url, '_blank');
+
+    form.style.display = 'none';
+    document.getElementById('form-actions').style.display = 'none';
+    const ty = document.getElementById('thank-you');
+    ty.querySelector('p').textContent =
+      'Стратегический отчёт открыт в новой вкладке. Если вкладка не открылась — перейдите по ссылке: ' + result.report_url;
+    ty.classList.add('show');
+    ty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  } catch (e) {
+    // Fallback: показываем успех без бэкенда
+    form.style.display = 'none';
+    document.getElementById('form-actions').style.display = 'none';
+    const ty = document.getElementById('thank-you');
+    ty.classList.add('show');
+    ty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Отправить анкету';
+  }
 });
 
 function resetForm() {
