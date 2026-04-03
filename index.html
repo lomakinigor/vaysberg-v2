@@ -790,6 +790,30 @@
       <p>Заполните анкету — это займёт 10–15 минут. Можно скачать и заполнить позже, если нет времени прямо сейчас.</p>
     </div>
 
+    <!-- ── Умная вставка ── -->
+    <div class="fb" id="smart-paste-block" style="margin-bottom:1.25rem;border:2px dashed var(--blue-300);background:var(--blue-50);">
+      <div class="fb-head" style="background:var(--blue-50);border-bottom:1px solid var(--blue-ll);">
+        <div class="fb-num" style="background:linear-gradient(135deg,#7c3aed,var(--blue-600));">✨</div>
+        <div>
+          <div class="fb-title" style="color:var(--blue-700);">Умная вставка</div>
+          <div style="font-size:.8125rem;color:var(--blue-500);margin-top:.125rem;">Вставьте любой текст о компании — анкета заполнится автоматически</div>
+        </div>
+      </div>
+      <div class="fb-body">
+        <textarea id="smart-input" rows="5"
+          placeholder="Вставьте сюда любое описание компании: текст с сайта, презентацию, описание из CRM, письмо клиента — всё что угодно. Например:&#10;&#10;«Компания Репутация, сайт reputaciya.ru, занимаемся юридическими услугами в Москве. VK: vk.com/reputaciya, Telegram: @reputation_glc. Конкуренты: ЮрПомощь, Правозащита. Бюджет на рекламу 50 000 в месяц...»"
+          style="border:1.5px solid var(--blue-300);background:#fff;min-height:120px;"></textarea>
+        <div style="display:flex;align-items:center;gap:.875rem;margin-top:.875rem;flex-wrap:wrap;">
+          <button type="button" id="smart-parse-btn" class="btn btn-primary" style="gap:.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Разобрать и заполнить
+          </button>
+          <span id="smart-result" style="font-size:.875rem;color:var(--gray-500);"></span>
+          <button type="button" onclick="document.getElementById('smart-input').value='';document.getElementById('smart-result').textContent=''" style="background:none;border:none;font-size:.8125rem;color:var(--gray-400);cursor:pointer;margin-left:auto;">Очистить</button>
+        </div>
+      </div>
+    </div>
+
     <div class="form-wrapper">
     <form id="intake-form" novalidate>
 
@@ -862,7 +886,19 @@
           <div class="ch-row"><label class="lbl">2ГИС</label><input type="url" name="ch_2gis" placeholder="ссылка на карточку или «нет»"></div>
           <div class="ch-row"><label class="lbl">Avito / каталоги</label><input type="text" name="ch_avito" placeholder="ссылки на профили или «нет»"></div>
           <div class="ch-row"><label class="lbl">WhatsApp / Viber</label><input type="text" name="ch_wa" placeholder="номер телефона или «нет»"></div>
-          <div class="ch-row"><label class="lbl">Другие каналы</label><input type="text" name="ch_other" placeholder="Другие площадки, сайты-отзовики и т.д."></div>
+          <!-- Динамические другие каналы -->
+          <div id="extra-channels-wrap">
+            <div class="ch-row extra-channel-row">
+              <label class="lbl">Другие каналы</label>
+              <div style="display:flex;gap:.5rem;align-items:center;">
+                <input type="text" name="ch_extra[]" placeholder="Название канала и ссылка" style="flex:1;">
+                <button type="button" onclick="addExtraChannel()" title="Добавить ещё"
+                  style="flex-shrink:0;width:2.25rem;height:2.25rem;border-radius:50%;border:1.5px solid var(--blue-300);background:var(--blue-50);color:var(--blue-600);font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;"
+                  onmouseover="this.style.background='var(--blue-600)';this.style.color='#fff'"
+                  onmouseout="this.style.background='var(--blue-50)';this.style.color='var(--blue-600)'">+</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1461,12 +1497,16 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   // Собираем данные формы
   const data = {};
   const fd = new FormData(form);
-  // Мультизначения (checkbox groups)
   const multi = {};
   fd.forEach((v, k) => {
     if (multi[k]) { multi[k].push(v); } else { multi[k] = [v]; }
   });
   Object.entries(multi).forEach(([k, v]) => { data[k] = v.length === 1 ? v[0] : v; });
+  // Дополнительные каналы → объединяем в строку
+  const extraInputs = [...form.querySelectorAll('[name="ch_extra[]"]')]
+    .map(i => i.value.trim()).filter(Boolean);
+  if (extraInputs.length) data['ch_other'] = extraInputs.join(' | ');
+  delete data['ch_extra[]'];
 
   // Показываем лоадер
   const btn = document.getElementById('submit-btn');
@@ -1503,6 +1543,165 @@ document.getElementById('submit-btn').addEventListener('click', async () => {
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Отправить анкету';
+  }
+});
+
+/* ── Добавить строку "Другой канал" ────────────────────── */
+function addExtraChannel() {
+  const wrap = document.getElementById('extra-channels-wrap');
+  const div = document.createElement('div');
+  div.className = 'ch-row extra-channel-row';
+  div.style.cssText = 'border-top:1px solid var(--gray-100);';
+  div.innerHTML = `
+    <label class="lbl"></label>
+    <div style="display:flex;gap:.5rem;align-items:center;">
+      <input type="text" name="ch_extra[]" placeholder="Название канала и ссылка" style="flex:1;">
+      <button type="button" onclick="this.closest('.extra-channel-row').remove()" title="Удалить"
+        style="flex-shrink:0;width:2.25rem;height:2.25rem;border-radius:50%;border:1.5px solid #fca5a5;background:#fff5f5;color:#ef4444;font-size:1.125rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;"
+        onmouseover="this.style.background='#ef4444';this.style.color='#fff'"
+        onmouseout="this.style.background='#fff5f5';this.style.color='#ef4444'">×</button>
+    </div>`;
+  wrap.appendChild(div);
+  div.querySelector('input').focus();
+}
+
+/* ── Умная вставка ─────────────────────────────────────── */
+document.getElementById('smart-parse-btn').addEventListener('click', () => {
+  const text = document.getElementById('smart-input').value.trim();
+  if (!text) return;
+
+  const form = document.getElementById('intake-form');
+  let filled = 0;
+
+  function fill(name, value) {
+    const el = form.querySelector(`[name="${name}"]`);
+    if (el && !el.value && value) { el.value = value; filled++; }
+  }
+
+  function match(patterns) {
+    for (const p of patterns) {
+      const m = text.match(p);
+      if (m) return m[1]?.trim();
+    }
+    return null;
+  }
+
+  // Название компании
+  const name = match([
+    /компания[:\s]+([^\n,\.]{2,60})/i,
+    /(?:ООО|ИП|АО|ЗАО|ПАО)[«\s"]+([^»"'\n]{2,50})/i,
+    /^([А-ЯA-Z][^\n,\.]{2,40})\s*[—\-,]/m,
+  ]);
+  if (name) fill('company_name', name.replace(/[«»"']/g,'').trim());
+
+  // Сайт
+  const site = text.match(/https?:\/\/[^\s,)\]>]+/);
+  if (site) fill('website', site[0]);
+
+  // Город
+  const city = match([
+    /(?:город|г\.|регион|в городе)[:\s]+([А-Яа-я\s-]{2,30})/i,
+    /(?:Москва|Санкт-Петербург|Новосибирск|Екатеринбург|Казань|Нижний Новгород|Самара|Омск|Челябинск|Ростов)/i,
+  ]);
+  if (city) fill('location', city);
+
+  // Ниша
+  const niche = match([
+    /(?:ниша|отрасль|сфера|деятельность|занимаемся|предоставляем|оказываем)[:\s]+([^\n,\.]{3,80})/i,
+    /(?:юридическ|строительств|медицин|образован|торговл|производств|недвижимост|ресторан|салон|агентств)[а-яёА-ЯЁ]*/i,
+  ]);
+  if (niche) fill('niche', niche);
+
+  // Продукт
+  const product = match([
+    /(?:продукт|услуг[иа]|предоставляем|продаём|оказываем)[:\s]+([^\n]{10,200})/i,
+  ]);
+  if (product) fill('product', product);
+
+  // VK
+  const vk = text.match(/(?:vk\.com\/|vkontakte\.ru\/|вк[:\s]+)([\w./-]+)/i);
+  if (vk) fill('ch_vk', 'https://vk.com/' + vk[1].replace(/^\//, ''));
+
+  // Telegram
+  const tg = text.match(/@([\w]{3,})|t\.me\/([\w]{3,})/i);
+  if (tg) fill('ch_tg_channel', '@' + (tg[1] || tg[2]));
+
+  // Instagram
+  const ig = text.match(/instagram[:\s@]+(@?[\w.]{2,40})/i);
+  if (ig) fill('ch_instagram', ig[1].startsWith('@') ? ig[1] : '@' + ig[1]);
+
+  // YouTube
+  const yt = text.match(/youtube\.com\/[^\s,]+/i);
+  if (yt) fill('ch_youtube', 'https://' + yt[0]);
+
+  // Яндекс.Карты
+  const ym = text.match(/yandex\.[a-z]+\/maps[^\s,]*/i);
+  if (ym) fill('ch_ymaps', 'https://' + ym[0]);
+
+  // WhatsApp
+  const wa = text.match(/(?:whatsapp|вотсап|wa)[:\s]+([+\d\s()-]{7,20})/i);
+  if (wa) fill('ch_wa', wa[1].trim());
+
+  // Бюджет
+  const budgetM = text.match(/бюджет[^\d]*(\d[\d\s]*)\s*(?:руб|₽|тыс|k|к)/i);
+  if (budgetM) {
+    const b = parseInt(budgetM[1].replace(/\s/g,''));
+    const radio = form.querySelector(
+      b === 0 ? '[name=budget][value=none]' :
+      b < 30000 ? '[name=budget][value=under30k]' :
+      b <= 100000 ? '[name=budget][value="30-100k"]' :
+      '[name=budget][value=over100k]'
+    );
+    if (radio && !form.querySelector('[name=budget]:checked')) {
+      radio.checked = true;
+      radio.closest('.opt-item')?.classList.add('checked');
+      filled++;
+    }
+  }
+
+  // CRM
+  const crm = match([
+    /(?:crm|срм)[:\s]+([^\n,\.]{2,30})/i,
+    /(amocrm|bitrix24|битрикс|амо|retailcrm|мегаплан)/i,
+  ]);
+  if (crm) fill('crm_name', crm);
+
+  // Конкуренты
+  const compMatch = text.match(/конкурент[ыов]*[:\s]+([^\n]{5,200})/i);
+  if (compMatch) {
+    const comps = compMatch[1].split(/[,;]/).map(s => s.trim()).filter(Boolean);
+    ['c1_name','c2_name','c3_name','c4_name','c5_name'].forEach((n, i) => {
+      if (comps[i]) fill(n, comps[i]);
+    });
+  }
+
+  // Типичный клиент
+  const client = match([
+    /(?:клиент[ыа]?|аудитория|покупател)[:\s]+([^\n]{10,200})/i,
+    /(?:целевая аудитория|ЦА)[:\s]+([^\n]{5,200})/i,
+  ]);
+  if (client) fill('typical_client', client);
+
+  // Срок
+  const deadline = match([
+    /(?:срок|дедлайн|нужно к|готово к)[:\s]+([^\n,]{3,40})/i,
+  ]);
+  if (deadline) fill('deadline', deadline);
+
+  // Что работает
+  const works = match([
+    /(?:работает|клиенты приходят|основной канал)[:\s]+([^\n]{5,200})/i,
+  ]);
+  if (works) fill('what_works', works);
+
+  // Результат
+  const res = document.getElementById('smart-result');
+  if (filled > 0) {
+    res.textContent = `✓ Заполнено ${filled} полей — проверьте и дополните вручную`;
+    res.style.color = 'var(--green)';
+  } else {
+    res.textContent = 'Не удалось распознать данные. Попробуйте добавить больше деталей.';
+    res.style.color = 'var(--amber)';
   }
 });
 
