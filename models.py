@@ -31,7 +31,7 @@ class IntakeForm(BaseModel):
     ch_wa: Optional[str] = None
     ch_other: Optional[str] = None
     # Раздел 3 — цели
-    goal: Optional[List[str]] = []
+    goal: Optional[Any] = []
     goal_result: Optional[str] = None
     # Раздел 4 — метрики
     m1_cur: Optional[str] = None
@@ -52,11 +52,11 @@ class IntakeForm(BaseModel):
     # Раздел 6 — доступ
     acc_metrika: Optional[str] = None
     acc_ga: Optional[str] = None
-    analytics_detail: Optional[List[str]] = []
+    analytics_detail: Optional[Any] = []
     crm_name: Optional[str] = None
     crm_access: Optional[str] = None
-    monthly_leads: Optional[int] = None
-    close_rate: Optional[int] = None
+    monthly_leads: Optional[Any] = None
+    close_rate: Optional[Any] = None
     acc_vk_ads: Optional[str] = None
     acc_direct: Optional[str] = None
     # Раздел 7 — конкуренты
@@ -89,7 +89,7 @@ class IntakeForm(BaseModel):
     typical_client: Optional[str] = None
     best_segments: Optional[str] = None
     target_segments: Optional[str] = None
-    discovery: Optional[List[str]] = []
+    discovery: Optional[Any] = []
     # Раздел 10
     future_plans: Optional[str] = None
     constraints: Optional[str] = None

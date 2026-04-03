@@ -593,7 +593,19 @@ def generate_roadmap(findings: List[Finding]) -> List[Dict]:
 
 # ─── Сборка отчёта ──────────────────────────────────────────
 
+def _to_list(val) -> list:
+    if val is None: return []
+    if isinstance(val, list): return val
+    return [val]
+
+
 def generate_report(data: dict, project_id: str) -> str:
+    # Нормализуем поля — одиночное значение → список
+    for field in ('goal', 'analytics_detail', 'discovery'):
+        data[field] = _to_list(data.get(field))
+    # Пустые строки для числовых полей → None
+    for field in ('monthly_leads', 'close_rate'):
+        if data.get(field) == '': data[field] = None
     d = IntakeForm(**data)
 
     channels    = analyze_channels(d)
