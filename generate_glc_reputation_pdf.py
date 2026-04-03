@@ -808,7 +808,7 @@ def add_page_number(canvas_obj, doc):
 # ─── Сборка PDF ───────────────────────────────────────────────────────────────
 
 def build_pdf():
-    output_path = Path(__file__).parent / "Стратегический_анализ_ГПК_Репутация_2026-04-02.pdf"
+    output_path = Path(__file__).parent / "examples" / "Стратегический_анализ_ГПК_Репутация_2026-04-02.pdf"
 
     doc = SimpleDocTemplate(
         str(output_path),

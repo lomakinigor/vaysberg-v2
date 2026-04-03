@@ -16,7 +16,7 @@ from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 def create_pdf_report():
     """Создаёт PDF отчёт о рекламных каналах."""
     
-    pdf_path = Path(__file__).parent / "advertising_channels_report.pdf"
+    pdf_path = Path(__file__).parent / "examples" / "advertising_channels_report.pdf"
     
     # Создаём документ
     doc = SimpleDocTemplate(

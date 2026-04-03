@@ -1,0 +1,2417 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Стратегический анализ — ГПК «Репутация» | 2026</title>
+  <meta name="description" content="Стратегический анализ каналов продвижения ГПК «Репутация». Екатеринбург, Урал. Цель: удвоение выручки. Методология research.md v2.0" />
+  <meta property="og:title" content="Стратегический анализ — ГПК «Репутация»" />
+  <meta property="og:description" content="Аудит сайта, Telegram, VK, Авито, 2ГИС. Реверс-инжиниринг воронки. Дорожная карта к удвоению выручки." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0f2544;
+      --navy-mid:    #1a3a6b;
+      --blue:        #1d4ed8;
+      --blue-light:  #3b82f6;
+      --blue-pale:   #eff6ff;
+      --blue-border: #bfdbfe;
+
+      --red:         #dc2626;
+      --red-pale:    #fef2f2;
+      --red-border:  #fecaca;
+
+      --amber:       #d97706;
+      --amber-pale:  #fffbeb;
+      --amber-border:#fde68a;
+
+      --green:       #16a34a;
+      --green-pale:  #f0fdf4;
+      --green-border:#bbf7d0;
+
+      --gray-50:     #f8fafc;
+      --gray-100:    #f1f5f9;
+      --gray-200:    #e2e8f0;
+      --gray-400:    #94a3b8;
+      --gray-600:    #475569;
+      --gray-800:    #1e293b;
+      --white:       #ffffff;
+
+      --font-head: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 3px rgba(15,37,68,.08), 0 1px 2px rgba(15,37,68,.06);
+      --shadow-md: 0 4px 12px rgba(15,37,68,.10), 0 2px 4px rgba(15,37,68,.06);
+      --shadow-lg: 0 10px 30px rgba(15,37,68,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray-800);
+      background: var(--gray-100);
+    }
+
+    /* ── Page wrapper ────────────────────────────────────── */
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--white);
+      box-shadow: 0 0 0 1px var(--gray-200), var(--shadow-lg);
+    }
+
+    /* ── COVER ───────────────────────────────────────────── */
+    .cover {
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 60%, #1e4480 100%);
+      padding: 52px 56px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 360px; height: 360px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cover::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29,78,216,.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 20px;
+    }
+    .cover-label::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #60a5fa;
+    }
+
+    .cover-title {
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -.5px;
+      margin-bottom: 6px;
+    }
+    .cover-title span {
+      background: linear-gradient(90deg, #93c5fd, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cover-sub {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255,255,255,.55);
+      margin-bottom: 32px;
+    }
+
+    .cover-meta-row {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,.1);
+      margin: 0 -56px;
+      padding: 0 56px;
+    }
+    .cover-meta-item {
+      padding: 14px 24px 14px 0;
+      margin-right: 24px;
+    }
+    .cover-meta-item:first-child { padding-left: 0; }
+    .cover-meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 3px;
+    }
+    .cover-meta-value {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+    }
+
+    /* ── Exec Summary (below cover, attached) ────────────── */
+    .exec-wrap {
+      background: var(--navy);
+      padding: 0 56px 32px;
+    }
+    .exec-box {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+    }
+    .exec-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #60a5fa;
+      margin-bottom: 10px;
+    }
+    .exec-box p {
+      font-size: 13.5px;
+      color: rgba(255,255,255,.72);
+      line-height: 1.65;
+      margin-bottom: 8px;
+    }
+    .exec-box p:last-child { margin-bottom: 0; }
+    .exec-box strong { color: rgba(255,255,255,.92); }
+
+    /* ── Stat stripe ─────────────────────────────────────── */
+    .stat-stripe {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,.08);
+      margin: 0 -56px;
+    }
+    .stat-item {
+      padding: 18px 28px;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-num.red   { color: #f87171; }
+    .stat-num.amber { color: #fbbf24; }
+    .stat-num.blue  { color: #60a5fa; }
+    .stat-desc {
+      font-size: 11px;
+      color: rgba(255,255,255,.4);
+      line-height: 1.4;
+    }
+
+    /* ── Inputs table (below cover) ──────────────────────── */
+    .inputs-section {
+      padding: 32px 56px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .inputs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--gray-200);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .inputs-row {
+      display: contents;
+    }
+    .inp-label {
+      background: var(--gray-50);
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .inp-value {
+      background: var(--white);
+      padding: 10px 16px;
+      font-size: 13.5px;
+      color: var(--gray-800);
+      font-weight: 500;
+    }
+    .inp-value.goal {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* ── Section header ──────────────────────────────────── */
+    .sec-header {
+      padding: 18px 56px;
+      background: var(--navy);
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .sec-header-num {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #60a5fa;
+      white-space: nowrap;
+    }
+    .sec-header-title {
+      font-family: var(--font-head);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    /* ── Content area ────────────────────────────────────── */
+    .content { padding: 32px 56px; }
+
+    h2 {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--blue-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h2:first-child { margin-top: 0; }
+
+    h3 {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin: 16px 0 8px;
+    }
+
+    p { margin-bottom: 10px; font-size: 13.5px; color: var(--gray-600); }
+    p:last-child { margin-bottom: 0; }
+    strong { color: var(--gray-800); font-weight: 600; }
+
+    /* ── Data tables ─────────────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 12px 0 20px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .data-table th {
+      background: var(--navy);
+      color: var(--white);
+      padding: 10px 14px;
+      text-align: left;
+      font-family: var(--font-head);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: .3px;
+    }
+    .data-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700, #334155);
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:nth-child(even) td { background: var(--gray-50); }
+    .data-table tr:hover td { background: var(--blue-pale); transition: background .15s; }
+
+    /* ── Status pills ────────────────────────────────────── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 11.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .pill.ok    { background: var(--green-pale);  color: var(--green);  border: 1px solid var(--green-border); }
+    .pill.warn  { background: var(--amber-pale);  color: var(--amber);  border: 1px solid var(--amber-border); }
+    .pill.bad   { background: var(--red-pale);    color: var(--red);    border: 1px solid var(--red-border); }
+    .pill.info  { background: var(--blue-pale);   color: var(--blue);   border: 1px solid var(--blue-border); }
+    .pill.gray  { background: var(--gray-100);    color: var(--gray-600); border: 1px solid var(--gray-200); }
+
+    /* Priority badges */
+    .pri {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .pri.p1 { background: var(--red-pale);   color: var(--red);   border: 1px solid var(--red-border); }
+    .pri.p2 { background: var(--amber-pale); color: var(--amber); border: 1px solid var(--amber-border); }
+    .pri.p3 { background: var(--green-pale); color: var(--green); border: 1px solid var(--green-border); }
+
+    /* ── Alert boxes ─────────────────────────────────────── */
+    .alert {
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      margin: 14px 0;
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .alert.warn   { background: var(--amber-pale); border-left: 4px solid var(--amber); color: #78350f; }
+    .alert.danger { background: var(--red-pale);   border-left: 4px solid var(--red);   color: #7f1d1d; }
+    .alert.info   { background: var(--blue-pale);  border-left: 4px solid var(--blue-light); color: #1e3a8a; }
+    .alert p { color: inherit; margin-bottom: 6px; }
+    .alert p:last-child { margin-bottom: 0; }
+    .alert strong { color: inherit; font-weight: 700; }
+
+    /* ── Checklist ───────────────────────────────────────── */
+    .checklist { list-style: none; padding: 0; margin: 10px 0 16px; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 13.5px;
+      color: var(--gray-700, #334155);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .checklist li .ci {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      margin-top: 1px;
+    }
+    .ci.r { background: var(--red-pale);   color: var(--red); }
+    .ci.a { background: var(--amber-pale); color: var(--amber); }
+    .ci.g { background: var(--green-pale); color: var(--green); }
+
+    /* ── KPI bar ─────────────────────────────────────────── */
+    .kpi-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--blue-pale);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      margin: 14px 0 22px;
+      font-size: 13px;
+      color: #1e40af;
+      font-weight: 600;
+    }
+    .kpi-bar::before {
+      content: '📊';
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       FUNNEL — visual flow
+       ══════════════════════════════════════════════════════ */
+    .funnel-wrap {
+      margin: 20px 0;
+    }
+    .funnel-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .funnel-step {
+      position: relative;
+      text-align: center;
+    }
+    /* arrow between steps */
+    .funnel-step:not(:last-child)::after {
+      content: '›';
+      position: absolute;
+      top: 32px;
+      right: -10px;
+      font-size: 22px;
+      color: var(--gray-400);
+      z-index: 2;
+    }
+
+    .funnel-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-size: 22px;
+      margin: 0 auto 8px;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    .funnel-badge.f-bad   { background: var(--red-pale);   border-color: var(--red-border); }
+    .funnel-badge.f-warn  { background: var(--amber-pale);  border-color: var(--amber-border); }
+    .funnel-badge.f-ok    { background: var(--green-pale);  border-color: var(--green-border); }
+    .funnel-badge.f-crit  { background: #fef2f2; border-color: #ef4444; box-shadow: 0 0 0 4px rgba(220,38,38,.1); }
+
+    .funnel-step-name {
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .funnel-step-status {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 6px;
+    }
+    .funnel-step-status.f-bad  { background: var(--red-pale);   color: var(--red); }
+    .funnel-step-status.f-warn { background: var(--amber-pale);  color: var(--amber); }
+    .funnel-step-status.f-crit { background: #fef2f2; color: #dc2626; }
+
+    .funnel-step-desc {
+      font-size: 11px;
+      color: var(--gray-600);
+      line-height: 1.5;
+      padding: 0 4px;
+    }
+
+    .funnel-missing {
+      margin-top: 12px;
+      background: var(--red-pale);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-size: 10.5px;
+      color: var(--red);
+      font-weight: 600;
+      text-align: left;
+      line-height: 1.4;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       ROADMAP — kanban board (THE STAR)
+       ══════════════════════════════════════════════════════ */
+    .roadmap-board {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .roadmap-col {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid transparent;
+    }
+    .roadmap-col.col-red    { border-color: var(--red-border); }
+    .roadmap-col.col-amber  { border-color: var(--amber-border); }
+    .roadmap-col.col-green  { border-color: var(--green-border); }
+
+    .roadmap-col-header {
+      padding: 14px 16px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .col-red   .roadmap-col-header { background: #fee2e2; }
+    .col-amber .roadmap-col-header { background: #fef3c7; }
+    .col-green .roadmap-col-header { background: #dcfce7; }
+
+    .roadmap-col-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .roadmap-col-title {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .col-red   .roadmap-col-title { color: #991b1b; }
+    .col-amber .roadmap-col-title { color: #92400e; }
+    .col-green .roadmap-col-title { color: #14532d; }
+
+    .roadmap-col-count {
+      margin-left: auto;
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+    .col-red   .roadmap-col-count { background: var(--red-pale);   color: var(--red); }
+    .col-amber .roadmap-col-count { background: var(--amber-pale); color: var(--amber); }
+    .col-green .roadmap-col-count { background: var(--green-pale); color: var(--green); }
+
+    .roadmap-col-body {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: var(--white);
+    }
+
+    .rm-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+      cursor: default;
+    }
+    .rm-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .col-red   .rm-card { border-left: 3px solid var(--red); }
+    .col-amber .rm-card { border-left: 3px solid var(--amber); }
+    .col-green .rm-card { border-left: 3px solid var(--green); }
+
+    .rm-card-title {
+      font-family: var(--font-head);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .rm-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 7px;
+    }
+    .rm-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      font-weight: 600;
+      background: var(--gray-100);
+      color: var(--gray-600);
+    }
+    .rm-tag.channel { background: var(--blue-pale);  color: #1e40af; }
+    .rm-tag.effort  { background: var(--gray-100);   color: var(--gray-600); }
+
+    .rm-card-effect {
+      font-size: 11.5px;
+      color: var(--gray-600);
+      line-height: 1.4;
+    }
+    .rm-card-effect strong { color: var(--gray-800); }
+
+    /* ── Section divider ─────────────────────────────────── */
+    .sec-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray-200) 20%, var(--gray-200) 80%, transparent);
+      margin: 0;
+    }
+
+    /* ── Strategy channel cards ──────────────────────────── */
+    .channel-card {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .channel-card-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .channel-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .ch-site    { background: #dbeafe; }
+    .ch-2gis    { background: #dcfce7; }
+    .ch-tg      { background: #e0f2fe; }
+    .ch-crm     { background: #f3e8ff; }
+
+    .channel-card-title {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+    .channel-card-sub {
+      font-size: 12px;
+      color: var(--gray-400);
+    }
+    .channel-card-pri { margin-left: auto; }
+    .channel-card-body { padding: 16px 20px; }
+
+    /* ── Conclusions cards ───────────────────────────────── */
+    .concl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .concl-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .concl-card-header {
+      padding: 12px 18px;
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .concl-card.good .concl-card-header { background: #dcfce7; color: #14532d; }
+    .concl-card.bad  .concl-card-header { background: #fee2e2; color: #7f1d1d; }
+    .concl-card-body {
+      padding: 12px 18px;
+      background: var(--white);
+      border: 1px solid;
+      border-top: none;
+      border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    }
+    .concl-card.good .concl-card-body { border-color: var(--green-border); }
+    .concl-card.bad  .concl-card-body { border-color: var(--red-border); }
+
+    .concl-item {
+      display: flex;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 13px;
+      border-bottom: 1px solid var(--gray-100);
+      line-height: 1.4;
+    }
+    .concl-item:last-child { border-bottom: none; }
+    .concl-item-icon { flex-shrink: 0; }
+
+    /* ── Three levers ────────────────────────────────────── */
+    .levers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 16px 0;
+    }
+    .lever-card {
+      border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .lever-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .lever-num {
+      font-family: var(--font-head);
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--blue-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .lever-title {
+      font-family: var(--font-head);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .lever-desc {
+      font-size: 12.5px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .lever-horizon {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-400);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .lever-horizon::before {
+      content: '⏱';
+      font-size: 12px;
+    }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .report-footer {
+      padding: 24px 56px;
+      background: var(--navy);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .footer-note {
+      font-size: 11.5px;
+      color: rgba(255,255,255,.38);
+      line-height: 1.6;
+      max-width: 580px;
+    }
+    .footer-badge {
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .footer-badge-name {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 2px;
+    }
+    .footer-badge-meta {
+      font-size: 11px;
+      color: rgba(255,255,255,.35);
+    }
+
+    /* ── Automation section ─────────────────────────────── */
+    .auto-intro {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .auto-intro-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+    .auto-intro-rule {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .auto-intro-sub {
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* Hub schema */
+    .hub-wrap {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .hub-label {
+      font-family: var(--font-head);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 14px;
+    }
+    .hub-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+    }
+    .hub-channels {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hub-ch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--gray-800);
+      box-shadow: var(--shadow-sm);
+    }
+    .hub-ch-icon { font-size: 16px; }
+    .hub-ch-count {
+      margin-left: auto;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--gray-400);
+    }
+    .hub-arrows {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+    }
+    .hub-arrow-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue-border), var(--blue-light));
+      position: relative;
+    }
+    .hub-arrow-line::after {
+      content: '▶';
+      position: absolute;
+      right: -6px;
+      top: -7px;
+      font-size: 10px;
+      color: var(--blue-light);
+    }
+    .hub-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .hub-crm {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 14px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+    }
+    .hub-crm-icon { font-size: 22px; margin-bottom: 4px; }
+    .hub-crm-name {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .hub-crm-sub { font-size: 10.5px; color: rgba(255,255,255,.5); }
+    .hub-outputs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .hub-out {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--gray-800);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Scenario cards */
+    .auto-scenarios { display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; }
+    .auto-scenario {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .auto-scenario-hdr {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .auto-scenario-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .auto-scenario-title {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .auto-scenario-trigger {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      background: var(--amber-pale);
+      border: 1px solid var(--amber-border);
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--amber);
+      white-space: nowrap;
+    }
+    .auto-scenario-body { padding: 16px 20px; }
+
+    /* Flow steps */
+    .auto-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .auto-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 110px;
+      max-width: 140px;
+      flex: 1;
+    }
+    .auto-step-box {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--gray-800);
+      text-align: center;
+      line-height: 1.35;
+      width: 100%;
+      box-shadow: var(--shadow-sm);
+    }
+    .auto-step-box.trigger-box {
+      background: var(--amber-pale);
+      border-color: var(--amber-border);
+      color: #78350f;
+    }
+    .auto-step-box.action-box {
+      background: var(--blue-pale);
+      border-color: var(--blue-border);
+      color: #1e3a8a;
+    }
+    .auto-step-box.outcome-box {
+      background: var(--green-pale);
+      border-color: var(--green-border);
+      color: #14532d;
+    }
+    .auto-step-arrow {
+      font-size: 14px;
+      color: var(--gray-400);
+      line-height: 32px;
+      padding: 0 4px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+    .auto-scenario-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .auto-meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+    .auto-meta-tag.tool { background: var(--gray-100); color: var(--gray-600); }
+    .auto-meta-tag.kpi  { background: var(--blue-pale); color: #1e40af; }
+    .auto-meta-tag.time { background: var(--green-pale); color: var(--green); }
+
+    /* Automation stack table */
+    .auto-stack {
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-top: 4px;
+    }
+
+    /* ── Print ───────────────────────────────────────────── */
+    @media print {
+      body { background: #fff; }
+      .page { box-shadow: none; }
+      .cover, .exec-wrap, .sec-header, .report-footer {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .roadmap-col-header, .rm-card, .concl-card-header {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .channel-icon, .kpi-bar, .alert, .pill, .pri {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .data-table th, .inputs-section, .stat-stripe {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ── Mobile ──────────────────────────────────────────── */
+    @media (max-width: 740px) {
+      .cover, .exec-wrap, .inputs-section, .content, .report-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      .sec-header { padding-left: 20px; padding-right: 20px; }
+      .cover-title { font-size: 28px; }
+      .stat-stripe { grid-template-columns: repeat(2, 1fr); }
+      .funnel-steps { grid-template-columns: 1fr; gap: 12px; }
+      .funnel-step::after { display: none; }
+      .roadmap-board { grid-template-columns: 1fr; }
+      .concl-grid, .levers-grid { grid-template-columns: 1fr; }
+      .cover-meta-row { gap: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ══════════════ COVER ══════════════ -->
+  <div class="cover">
+    <div class="cover-label">Стратегический анализ · Методология research.md v2.0</div>
+    <div class="cover-title">ГПК <span>«Репутация»</span></div>
+    <div class="cover-sub">Группа Правовых Компаний · Екатеринбург, Урал · 2 апреля 2026</div>
+
+    <div class="cover-meta-row">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Сайт</div>
+        <div class="cover-meta-value">glc-reputation.ru</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">CRM</div>
+        <div class="cover-meta-value">Битрикс24</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Каналы</div>
+        <div class="cover-meta-value">Сайт, VK, Telegram, Авито, 2ГИС</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Фокус</div>
+        <div class="cover-meta-value">Юридические услуги для бизнеса</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Цель</div>
+        <div class="cover-meta-value" style="color:#60a5fa">Удвоение выручки</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="exec-wrap">
+    <div class="exec-box">
+      <div class="exec-label">Executive Summary</div>
+      <p>ГПК «Репутация» — действующая юридическая компания с 8-летней историей, CRM на Битрикс24 и присутствием на ключевых платформах. Главный барьер роста — <strong>отсутствие B2B-упаковки</strong>: сайт не разделяет предложения для бизнеса и физлиц, нет цен-ориентиров, нет кейсов, нет FAQ. Воронка имеет критический провал на этапе «Желание / Решение».</p>
+      <p><strong>Три рычага к удвоению:</strong> переупаковать предложение под B2B → замкнуть аналитику и автоматизировать первый контакт → системно наращивать доверие через отзывы и контент.</p>
+    </div>
+
+    <!-- Stat stripe -->
+    <div class="stat-stripe" style="margin-top: 20px;">
+      <div class="stat-item">
+        <div class="stat-num" style="color:#16a34a">1 млрд+</div>
+        <div class="stat-desc">взысканных рублей<br>за историю компании</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" style="color:#1d4ed8">20+ лет</div>
+        <div class="stat-desc">юридического опыта<br>учредителя компании</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num red">0</div>
+        <div class="stat-desc">кейсов для бизнеса<br>на сайте (при 200+ делах)</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num amber">75–100к</div>
+        <div class="stat-desc">средний чек, ₽/дело<br>5–10 новых клиентов/мес</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ОТРАСЛЬ И ЦА ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 1</span>
+    <span class="sec-header-title">Отрасль, ниша, целевая аудитория</span>
+  </div>
+  <div class="content">
+    <h2>Рынок и ниша</h2>
+    <p>Компания работает в сегменте юридических услуг (ОКВЭД 69.10). Рынок Екатеринбурга высококонкурентный. Тренд 2024–2026: рост спроса на B2B-юристику — споры с контрагентами, налоговые проверки, субсидиарная ответственность, банкротства дебиторов.</p>
+
+    <div class="alert warn">
+      <p><strong>Критическое противоречие:</strong> набор услуг на сайте — универсальный (семейные споры + арбитраж). При цели «B2B» специализация нигде не выражена явно. Ни один сегмент не чувствует, что «это для меня».</p>
+    </div>
+
+    <h2>Приоритетная целевая аудитория</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Сегмент</th>
+          <th>Ключевые боли</th>
+          <th>Где ищет юриста</th>
+          <th>Приоритет</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>МСБ: ИП и ООО</strong> (до 50 чел.)</td>
+          <td>Споры с контрагентами, взыскание долгов, налоговые проверки</td>
+          <td>Яндекс, 2ГИС, рекомендации</td>
+          <td><span class="pill ok">✓ Основной</span></td>
+        </tr>
+        <tr>
+          <td><strong>Средний бизнес</strong> (50–200 чел.)</td>
+          <td>Арбитраж, трудовые споры, банкротство дебиторов</td>
+          <td>Яндекс.Директ, партнёрские связи</td>
+          <td><span class="pill ok">✓ Основной</span></td>
+        </tr>
+        <tr>
+          <td><strong>Физлица</strong> с имущественными спорами</td>
+          <td>Взыскание долгов, недвижимость, наследство</td>
+          <td>Авито, Яндекс, карты</td>
+          <td><span class="pill gray">Вторичный</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ АНАЛИЗ КАНАЛОВ ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 4</span>
+    <span class="sec-header-title">Анализ каналов продвижения</span>
+  </div>
+  <div class="content">
+
+    <h2>4.1 Сайт — glc-reputation.ru</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Элемент</th><th>Статус</th><th>Наблюдение</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>H1 / заголовок</td><td><span class="pill warn">⚠ Слабо</span></td><td>«Группа Правовых Компаний Репутация» — название бренда, не ключевой запрос аудитории</td></tr>
+        <tr><td>Цены / пакеты</td><td><span class="pill bad">✗ Нет</span></td><td>Критический барьер для B2B-клиента — не может оценить бюджет без звонка</td></tr>
+        <tr><td>Лендинг для бизнеса</td><td><span class="pill bad">✗ Нет</span></td><td>Нет отдельной страницы под B2B-услуги с SEO-семантикой</td></tr>
+        <tr><td>FAQ</td><td><span class="pill bad">✗ Нет</span></td><td>Возражения клиента не закрыты</td></tr>
+        <tr><td>Кейсы для бизнеса</td><td><span class="pill bad">✗ Нет</span></td><td>Нет доказательств экспертизы в корпоративных спорах</td></tr>
+        <tr><td>Отзывы</td><td><span class="pill warn">⚠ Устарели</span></td><td>4 отзыва, последний — 2023 год; все от физлиц</td></tr>
+        <tr><td>Яндекс.Метрика</td><td><span class="pill ok">✓ Есть</span></td><td>Подключена, но цели на конверсии не настроены</td></tr>
+        <tr><td>Мобильная версия</td><td><span class="pill warn">⚠ Частично</span></td><td>Элементы адаптивного дизайна присутствуют</td></tr>
+        <tr><td>CMS</td><td><span class="pill warn">⚠ Ограничена</span></td><td>Megagroup.ru — шаблонная платформа, ограниченные SEO и кастомизация</td></tr>
+        <tr><td>Email в контактах</td><td><span class="pill warn">⚠ Слабо</span></td><td>pravo-3616198@yandex.ru — непрофессионально для B2B-аудитории</td></tr>
+      </tbody>
+    </table>
+
+    <h2>4.2 Telegram — @reputation_glc</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Метрика</th><th>Значение</th><th>Оценка</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Название</td><td>«Репутация | Юристы, возвращающие деньги»</td><td><span class="pill warn">⚠ B2C-слоган</span></td></tr>
+        <tr><td>Подписчики</td><td><strong>132</strong></td><td><span class="pill bad">✗ Критично мало</span></td></tr>
+        <tr><td>Бот для заявок</td><td>@One_make_bot</td><td><span class="pill ok">✓ Есть</span></td></tr>
+        <tr><td>Интеграция бот → Битрикс24</td><td>Не верифицирована</td><td><span class="pill warn">⚠ Проверить</span></td></tr>
+        <tr><td>Частота публикаций</td><td>Не верифицирована</td><td><span class="pill gray">Нет данных</span></td></tr>
+        <tr><td>Охват / ER</td><td>Закрытая статистика Telegram</td><td><span class="pill gray">Недоступно</span></td></tr>
+      </tbody>
+    </table>
+
+    <h2>4.3 VK / Авито / 2ГИС</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>Канал</th><th>Рейтинг</th><th>Отзывы</th><th>Свежие (2025–26)</th><th>B2B-описание</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>2ГИС</strong></td>
+          <td><span class="pill ok">4.8 ★</span></td>
+          <td><span class="pill ok">25 отзывов (23 на 2ГИС + 13 Flamp)</span></td>
+          <td><span class="pill warn">Не верифицированы</span></td>
+          <td><span class="pill bad">Нет B2B-описания. Теги: юр. услуги, суды, недвижимость, банкротство физлиц</span></td>
+        </tr>
+        <tr>
+          <td><strong>TenChat</strong></td>
+          <td>—</td>
+          <td><span class="pill ok">141 подписчик</span></td>
+          <td><span class="pill ok">1–2 поста/нед. (авг–дек 2025)</span></td>
+          <td><span class="pill warn">Контент хорошего качества (кейсы, разборы), но B2B-CTA в постах не выражен</span></td>
+        </tr>
+        <tr>
+          <td><strong>Авито</strong></td>
+          <td><span class="pill warn">Не верифицирован</span></td>
+          <td><span class="pill warn">Не верифицированы</span></td>
+          <td><span class="pill bad">Не верифицированы</span></td>
+          <td><span class="pill bad">Нет цен в объявлениях</span></td>
+        </tr>
+        <tr>
+          <td><strong>VK</strong></td>
+          <td>—</td>
+          <td><span class="pill bad">Личный профиль, не бизнес-страница</span></td>
+          <td><span class="pill warn">Не верифицирована</span></td>
+          <td><span class="pill bad">Открытая линия Битрикс24 не подключена к личному профилю</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="alert info" style="font-size:12px">Рейтинг ниже 4.5 ★ и/или отсутствие свежих отзывов прямо снижают конверсию B2B-клиента. Аудит карточек — первоочередной шаг.</p>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ ВОРОНКА ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 4.7</span>
+    <span class="sec-header-title">Реверс-инжиниринг воронки продаж</span>
+  </div>
+  <div class="content">
+    <p style="margin-bottom:20px">Воронка реконструирована по публичным данным <strong>и ответам собственника</strong>. Реальные конверсионные цифры — только через Яндекс.Метрику и Битрикс24.</p>
+
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 20px;margin-bottom:20px">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:10px">5 ЭТАПОВ РАБОТЫ (по словам владельца)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#334155"><strong>①</strong> Изучение документов клиента</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#334155"><strong>②</strong> Консультация + стратегия спора</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#334155"><strong>③</strong> Претензионный порядок</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#334155"><strong>④</strong> Судебный порядок</div>
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:12.5px;font-weight:600;color:#334155"><strong>⑤</strong> Исполнительное производство</div>
+      </div>
+      <div style="margin-top:10px;font-size:12px;color:#64748b">Ключевой этап воронки по словам собственника: <strong>консультация с вариантами решения</strong>. Лид-магниты: бесплатный анализ документов + литмагнит «Правила проверки контрагентов».</div>
+    </div>
+
+    <div class="funnel-wrap">
+      <div class="funnel-steps">
+
+        <div class="funnel-step">
+          <div class="funnel-badge f-bad">📢</div>
+          <div class="funnel-step-name">1. Осведомлённость</div>
+          <span class="funnel-step-status f-bad">Слабо</span>
+          <div class="funnel-step-desc">2ГИС, Авито, Метрика</div>
+          <div class="funnel-missing">Нет SEO-контента, нет рекламы</div>
+        </div>
+
+        <div class="funnel-step">
+          <div class="funnel-badge f-bad">🔥</div>
+          <div class="funnel-step-name">2. Интерес / Прогрев</div>
+          <span class="funnel-step-status f-bad">Слабо</span>
+          <div class="funnel-step-desc">Telegram-канал (132 подп.)</div>
+          <div class="funnel-missing">Нет кейсов, нет блога, нет B2B-контента</div>
+        </div>
+
+        <div class="funnel-step">
+          <div class="funnel-badge f-crit">💡</div>
+          <div class="funnel-step-name">3. Желание / Решение</div>
+          <span class="funnel-step-status f-crit">КРИТИЧНО</span>
+          <div class="funnel-step-desc">4 отзыва (2023), «8 лет»</div>
+          <div class="funnel-missing">Нет цен · Нет FAQ · Нет B2B-кейсов</div>
+        </div>
+
+        <div class="funnel-step">
+          <div class="funnel-badge f-warn">📋</div>
+          <div class="funnel-step-name">4. Действие / Заявка</div>
+          <span class="funnel-step-status f-warn">Частично</span>
+          <div class="funnel-step-desc">Форма на сайте, бот</div>
+          <div class="funnel-missing">Нет мессенджер-кнопки на сайте</div>
+        </div>
+
+        <div class="funnel-step">
+          <div class="funnel-badge f-bad">🔄</div>
+          <div class="funnel-step-name">5. Удержание</div>
+          <span class="funnel-step-status f-bad">Нет</span>
+          <div class="funnel-step-desc">Telegram-канал</div>
+          <div class="funnel-missing">Нет авто follow-up, нет сбора отзывов</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="alert danger" style="margin-top:20px">
+      <p><strong>Главный провал — этап 3:</strong> клиент приходит на сайт, не находит ни цен, ни кейсов, ни ответов на возражения — и уходит к конкуренту, у которого эти элементы есть. Устранение этого провала — самый быстрый путь к росту конверсии.</p>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ СТРАТЕГИЯ ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 6</span>
+    <span class="sec-header-title">Стратегия усиления по каналам</span>
+  </div>
+  <div class="content">
+
+    <!-- Сайт -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-icon ch-site">🌐</div>
+        <div>
+          <div class="channel-card-title">Сайт glc-reputation.ru</div>
+          <div class="channel-card-sub">Основная точка конверсии B2B-клиента</div>
+        </div>
+        <div class="channel-card-pri"><span class="pri p1">🔴 Критичный</span></div>
+      </div>
+      <div class="channel-card-body">
+        <p><strong>Разрыв:</strong> B2B-клиент не находит ни цен, ни кейсов, ни FAQ и уходит.</p>
+        <ul class="checklist">
+          <li><span class="ci r">🔴</span>Создать лендинг «Юристы для бизнеса»: арбитраж, взыскание долгов, экспертиза договоров. Отдельный URL и SEO-семантика.</li>
+          <li><span class="ci r">🔴</span>Добавить цены-ориентиры или пакеты («от X ₽», «абонентское сопровождение от Y ₽/мес»).</li>
+          <li><span class="ci r">🔴</span>Добавить 5–10 кейсов для бизнеса: задача → действия → результат. Анонимно по 152-ФЗ.</li>
+          <li><span class="ci a">🟡</span>FAQ с 10 вопросами: «Сколько длится арбитраж?», «Что если проиграем?», «Работаете по Уралу?»</li>
+          <li><span class="ci r">🔴</span>Настроить цели в Яндекс.Метрике + UTM-метки на все внешние ссылки.</li>
+          <li><span class="ci a">🟡</span>Заменить email на корпоративный @glc-reputation.ru.</li>
+        </ul>
+        <div class="kpi-bar">Рост конверсии сайта на 30–50%; рост B2B-заявок из органики</div>
+      </div>
+    </div>
+
+    <!-- 2ГИС + Авито -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-icon ch-2gis">📍</div>
+        <div>
+          <div class="channel-card-title">2ГИС и Авито</div>
+          <div class="channel-card-sub">Quick Wins — быстрый результат без крупных вложений</div>
+        </div>
+        <div class="channel-card-pri"><span class="pri p1">🔴 Высокий</span></div>
+      </div>
+      <div class="channel-card-body">
+        <p><strong>Разрыв:</strong> в Екатеринбурге большинство срочных юридических запросов идут через 2ГИС. Рейтинг ниже 4.7 ★ и устаревшие отзывы критически снижают доверие.</p>
+        <ul class="checklist">
+          <li><span class="ci r">🔴</span>Аудит карточек: актуальные фото офиса и команды, B2B-описание, корректные часы.</li>
+          <li><span class="ci r">🔴</span>Запустить автосбор отзывов через Битрикс24: после закрытия дела → автосообщение клиенту со ссылкой на 2ГИС. Цель: 2–3 отзыва в месяц.</li>
+          <li><span class="ci a">🟡</span>Отвечать на все отзывы — потенциальные клиенты это видят.</li>
+          <li><span class="ci r">🔴</span>Авито: B2B-объявления с ценами «от…». Объявления с ценой ранжируются выше.</li>
+        </ul>
+        <div class="kpi-bar">Рейтинг 2ГИС ≥ 4.7 ★ · +15 отзывов за 6 мес · Рост заявок с Авито</div>
+      </div>
+    </div>
+
+    <!-- Telegram -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-icon ch-tg">✈️</div>
+        <div>
+          <div class="channel-card-title">Telegram @reputation_glc</div>
+          <div class="channel-card-sub">Перезапуск под B2B-аудиторию</div>
+        </div>
+        <div class="channel-card-pri"><span class="pri p1">🔴 Высокий</span></div>
+      </div>
+      <div class="channel-card-body">
+        <p><strong>Разрыв:</strong> 132 подписчика — канал не работает как инструмент прогрева. Позиционирование «для всех» не привлекает бизнес.</p>
+        <ul class="checklist">
+          <li><span class="ci a">🟡</span>Сменить позиционирование: «Юридическая защита бизнеса» в описании канала.</li>
+          <li><span class="ci a">🟡</span>3 постоянные рубрики: «Кейс недели», «Разбор договора», «Как защититься от...»</li>
+          <li><span class="ci a">🟡</span>Минимум 3 поста в неделю. Каждый — с одним CTA: «Похожая ситуация? → @One_make_bot»</li>
+          <li><span class="ci r">🔴</span>Верифицировать: заявки из @One_make_bot автоматически создают сделку в Битрикс24.</li>
+          <li><span class="ci a">🟡</span>Кросс-промо: ссылка на канал в сайте, VK, 2ГИС, Авито.</li>
+        </ul>
+        <div class="kpi-bar">Рост подписчиков 132 → 500+ за 6 мес · 5+ заявок через бот в месяц</div>
+      </div>
+    </div>
+
+    <!-- TenChat -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-icon ch-tg">💼</div>
+        <div>
+          <div class="channel-card-title">TenChat — профиль Виталия Лоскутова</div>
+          <div class="channel-card-sub">Незаметный актив с высоким B2B-потенциалом</div>
+        </div>
+        <div class="channel-card-pri"><span class="pri p2">🟡 Средний</span></div>
+      </div>
+      <div class="channel-card-body">
+        <p><strong>Факт:</strong> профиль активный — 141 подписчик, 1–2 поста в неделю (авг–дек 2025), качественные кейсы и разборы. Аудитория TenChat — именно предприниматели и топ-менеджеры. Это самый прямой канал к идеальному клиенту компании.</p>
+        <ul class="checklist">
+          <li><span class="ci a">🟡</span>Добавить чёткий B2B-CTA в каждый пост: «Похожая ситуация с долгом? Пишите в ЛС или по ссылке в профиле».</li>
+          <li><span class="ci a">🟡</span>Прикрепить ссылку на Telegram-бот @One_make_bot или форму сайта в «шапке» профиля.</li>
+          <li><span class="ci a">🟡</span>Регулярно публиковать кейсы в формате «клиент вернул X млн — вот как это было» — именно этот контент вирусится в TenChat B2B-среде.</li>
+          <li><span class="ci g">🟢</span>Кросс-публикация: посты TenChat → адаптируются под Telegram-канал. Одно усилие — два канала.</li>
+          <li><span class="ci g">🟢</span>Участие в TenChat-чатах предпринимателей Урала: комментарии с экспертной позицией = бесплатный охват.</li>
+        </ul>
+        <div class="kpi-bar">141 → 500+ подписчиков за 6 мес · 3–5 входящих заявок через ЛС в месяц</div>
+      </div>
+    </div>
+
+    <!-- Битрикс24 -->
+    <div class="channel-card">
+      <div class="channel-card-header">
+        <div class="channel-icon ch-crm">⚙️</div>
+        <div>
+          <div class="channel-card-title">Битрикс24</div>
+          <div class="channel-card-sub">Главный незадействованный рычаг</div>
+        </div>
+        <div class="channel-card-pri"><span class="pri p1">🔴 Стратегический</span></div>
+      </div>
+      <div class="channel-card-body">
+        <p><strong>Разрыв:</strong> Битрикс24 есть, но вероятно не используется в полную силу — каналы не замкнуты, аналитика не настроена.</p>
+        <ul class="checklist">
+          <li><span class="ci r">🔴</span>Подключить все каналы (сайт, VK, Telegram-бот, Авито, звонок) как источники в единую воронку.</li>
+          <li><span class="ci r">🔴</span>UTM-метки → Яндекс.Метрика → Битрикс24. Станет видно, какие каналы реально дают клиентов.</li>
+          <li><span class="ci r">🔴</span>Автоответ на заявку &lt; 2 минут. Первый юрист, который ответил, чаще всего получает клиента.</li>
+          <li><span class="ci a">🟡</span>Автозапрос отзыва: через 3 дня после «Выиграно» → сообщение со ссылкой на 2ГИС.</li>
+          <li><span class="ci g">🟢</span>Реактивация базы: клиенты за 2–3 года → рассылка с B2B-оффером.</li>
+        </ul>
+        <div class="kpi-bar">100% заявок в CRM с источником · Конверсия заявка→сделка измерима и растёт</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ КОНКУРЕНТЫ ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 6.1</span>
+    <span class="sec-header-title">Конкурентная среда — по данным собственника</span>
+  </div>
+  <div class="content">
+    <p style="margin-bottom:16px">Собственник назвал 13 компаний-конкурентов на рынке Екатеринбурга и Свердловской области. Ключевой дифференциатор ГПК «Репутация» в его словах: <strong>«Мы берём деньги не просто так, чтобы посудиться, а за результат»</strong>.</p>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Конкурент</th>
+          <th>Тип</th>
+          <th>Позиционирование (предположительно)</th>
+          <th>Угроза для ГПК «Репутация»</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Перегонцев и партнёры</strong></td>
+          <td><span class="pill warn">Партнёрство</span></td>
+          <td>Широкий профиль, корпоративное право</td>
+          <td><span class="pill warn">🟡 Средняя</span></td>
+        </tr>
+        <tr>
+          <td><strong>СМ Практика</strong></td>
+          <td><span class="pill warn">Юр. компания</span></td>
+          <td>Арбитраж, банкротство</td>
+          <td><span class="pill bad">🔴 Высокая</span></td>
+        </tr>
+        <tr>
+          <td><strong>Генезис</strong></td>
+          <td><span class="pill warn">Юр. компания</span></td>
+          <td>Корпоративные и налоговые споры</td>
+          <td><span class="pill bad">🔴 Высокая</span></td>
+        </tr>
+        <tr>
+          <td><strong>Право-24</strong></td>
+          <td><span class="pill ok">Сеть</span></td>
+          <td>Массовые услуги, сильный бренд</td>
+          <td><span class="pill bad">🔴 Высокая</span></td>
+        </tr>
+        <tr>
+          <td><strong>Содби</strong></td>
+          <td><span class="pill ok">Сеть</span></td>
+          <td>Сеть юридических офисов, масштаб</td>
+          <td><span class="pill bad">🔴 Высокая</span></td>
+        </tr>
+        <tr>
+          <td><strong>Городисские и партнёры</strong></td>
+          <td><span class="pill warn">Партнёрство</span></td>
+          <td>Интеллектуальная собственность, арбитраж</td>
+          <td><span class="pill warn">🟡 Средняя</span></td>
+        </tr>
+        <tr>
+          <td><strong>Юр. фирма «Интеллект»</strong></td>
+          <td><span class="pill warn">Юр. компания</span></td>
+          <td>Корпоративное, банкротство</td>
+          <td><span class="pill warn">🟡 Средняя</span></td>
+        </tr>
+        <tr>
+          <td><strong>Асгард, Энса, Эдельвейс, Исеть, Юском</strong></td>
+          <td><span class="pill gray">Разные</span></td>
+          <td>Широкий профиль</td>
+          <td><span class="pill warn">🟡 Средняя</span></td>
+        </tr>
+        <tr>
+          <td><strong>ЦЭЭ «Налоги и финансы»</strong></td>
+          <td><span class="pill warn">Специализированный</span></td>
+          <td>Налоговые споры, экспертиза</td>
+          <td><span class="pill warn">🟡 Средняя — только налоговый сегмент</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert info" style="margin-top:20px">
+      <strong>Дифференциация:</strong> Большинство конкурентов работают в широком профиле. ГПК «Репутация» имеет возможность <strong>занять нишу «взыскание долгов B2B под ключ»</strong> — узкую, понятную, с измеримым результатом. На сайте и во всех каналах это позиционирование сейчас не выражено.
+    </div>
+
+    <div style="margin-top:20px">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#94a3b8;margin-bottom:12px">СТРАХИ КЛИЕНТОВ ПРИ ВЫБОРЕ — И КАК ИХ ЗАКРЫВАТЬ</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:14px 16px">
+          <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:6px">❌ Страх: «Проиграете дело, и я потеряю шанс»</div>
+          <div style="font-size:12.5px;color:#334155">Ответ: бесплатный анализ документов до подписания договора. Честно говорим о шансах. Не берём дело, если перспективы слабые.</div>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:14px 16px">
+          <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:6px">❌ Страх: «Дорого, найду дешевле»</div>
+          <div style="font-size:12.5px;color:#334155">Ответ: «Дешёвый юрист, проигравший дело — это потерянный долг навсегда. У нас — за результат». Показываем взысканный 1 млрд+.</div>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:14px 16px">
+          <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:6px">❌ Страх: «Не буду знать, что происходит с делом»</div>
+          <div style="font-size:12.5px;color:#334155">Ответ: автоинформирование на каждом этапе (сценарий автоматизации №7). Клиент всегда в курсе — это ключевой момент по словам собственника.</div>
+        </div>
+        <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:14px 16px">
+          <div style="font-size:12px;font-weight:700;color:#dc2626;margin-bottom:6px">❌ Страх: «Придётся самому общаться с должником»</div>
+          <div style="font-size:12.5px;color:#334155">Ответ: «Услуга под ключ — от претензии до исполнительного производства. Клиент не касается должника совсем».</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ АВТОМАТИЗАЦИЯ ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Раздел 7</span>
+    <span class="sec-header-title">Карта автоматизации — восемь рабочих сценариев</span>
+  </div>
+  <div class="content">
+
+    <div class="auto-intro">
+      <div class="auto-intro-icon">⚡</div>
+      <div>
+        <div class="auto-intro-rule">Золотое правило: автоматизируем только то, что уже работает вручную</div>
+        <p class="auto-intro-sub">Алгоритм: <strong>тест вручную → если приносит результат → автоматизируем.</strong> Каждый из восьми сценариев ниже можно запустить за 1–5 дней — они не требуют кода, только правильной настройки Битрикс24 и существующих инструментов. Сценарии 6–8 основаны напрямую на специфике процессов компании по словам собственника.</p>
+      </div>
+    </div>
+
+    <!-- Hub schema -->
+    <h2>⚙️ Битрикс24 как единый центр обработки заявок</h2>
+
+    <div class="hub-wrap">
+      <div class="hub-label">Схема подключений — все каналы в одну воронку</div>
+      <div class="hub-grid">
+        <div class="hub-channels">
+          <div class="hub-ch"><span class="hub-ch-icon">🌐</span> Сайт glc-reputation.ru<span class="hub-ch-count">форма заявки</span></div>
+          <div class="hub-ch"><span class="hub-ch-icon">✈️</span> Telegram @One_make_bot<span class="hub-ch-count">webhook</span></div>
+          <div class="hub-ch"><span class="hub-ch-icon">📍</span> Авито<span class="hub-ch-count">почта + webhook</span></div>
+          <div class="hub-ch"><span class="hub-ch-icon">🅾️</span> ВКонтакте<span class="hub-ch-count">открытая линия</span></div>
+          <div class="hub-ch"><span class="hub-ch-icon">📞</span> Звонки (IP-телефония)<span class="hub-ch-count">интеграция</span></div>
+        </div>
+        <div class="hub-arrows">
+          <div class="hub-arrow-line"></div>
+          <div class="hub-arrow-line"></div>
+          <div class="hub-arrow-line"></div>
+          <div class="hub-arrow-line"></div>
+          <div class="hub-arrow-line"></div>
+        </div>
+        <div class="hub-center">
+          <div class="hub-crm">
+            <div class="hub-crm-icon">🗂</div>
+            <div class="hub-crm-name">Битрикс24</div>
+            <div class="hub-crm-sub">Единая воронка · UTM · Аналитика</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Канал</th>
+              <th>Способ подключения</th>
+              <th>Статус</th>
+              <th>Приоритет</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Сайт (форма)</td>
+              <td>Webhook / Email-парсер Битрикс24</td>
+              <td><span class="pill warn">Проверить</span></td>
+              <td><span class="pri p1">🔴 1 день</span></td>
+            </tr>
+            <tr>
+              <td>Telegram @One_make_bot</td>
+              <td>Битрикс24 → Открытые линии → Telegram</td>
+              <td><span class="pill bad">Не настроен</span></td>
+              <td><span class="pri p1">🔴 1 день</span></td>
+            </tr>
+            <tr>
+              <td>Авито</td>
+              <td>Форвардинг писем с Авито в Битрикс24 CRM</td>
+              <td><span class="pill bad">Не настроен</span></td>
+              <td><span class="pri p1">🔴 2 часа</span></td>
+            </tr>
+            <tr>
+              <td>ВКонтакте</td>
+              <td>Открытые линии Битрикс24 → VK сообщества</td>
+              <td><span class="pill bad">Не настроен</span></td>
+              <td><span class="pri p2">🟡 2 дня</span></td>
+            </tr>
+            <tr>
+              <td>Звонки</td>
+              <td>IP-телефония (Манго/Zadarma) + интеграция</td>
+              <td><span class="pill gray">Неизвестно</span></td>
+              <td><span class="pri p2">🟡 1 неделя</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Scenarios -->
+    <h2>🗂 Пять сценариев автоматизации</h2>
+    <div class="auto-scenarios">
+
+      <!-- Сценарий 1 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">1</div>
+          <div class="auto-scenario-title">Маршрутизация входящей заявки — ни одна не потеряется</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: новое обращение</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Клиент пишет из любого канала → сделка создаётся автоматически → менеджер получает уведомление → если молчит 30 минут, руководитель видит эскалацию.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Заявка из любого канала (сайт / бот / Авито / VK / звонок)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Битрикс24 создаёт сделку с источником и UTM</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Автоответ клиенту: «Получили заявку, перезвоним через 15 минут»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Уведомление ответственному менеджеру (push / Telegram)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Если нет ответа 30 мин → эскалация руководителю</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Клиент получил ответ &lt; 2 мин · Сделка с источником зафиксирована</div>
+            </div>
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 Роботы + Открытые линии</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 1–2 дня</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 0 потерянных заявок · время ответа &lt; 2 мин</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 2 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">2</div>
+          <div class="auto-scenario-title">Автосбор отзывов на 2ГИС — 2–3 отзыва в месяц без ручных напоминаний</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: сделка «Выиграно»</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">После закрытия дела клиент получает персонализированное сообщение с просьбой оставить отзыв. Если молчит — мягкий повтор через неделю. Ни одного ручного действия со стороны юриста.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Сделка переходит в «Выиграно» в Битрикс24</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Пауза 3 дня (Робот «Ждать»)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">SMS / WhatsApp / Telegram: «{Имя}, спасибо, что выбрали нас! Оставьте отзыв: [ссылка 2ГИС]»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Если нет реакции 7 дней → мягкий повтор: «Будем рады вашему мнению»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Новый отзыв на 2ГИС · Рейтинг растёт без ручного контроля</div>
+            </div>
+          </div>
+          <div class="alert info" style="margin: 12px 0 10px">
+            <strong>Шаблон сообщения:</strong> «{Имя}, спасибо, что доверили нам своё дело! Если у вас есть пара минут — очень поможет отзыв на 2ГИС: [ссылка]. Это важно для нас и поможет другим предпринимателям найти надёжного юриста.»
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 Роботы + SMS/WhatsApp</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 1 день</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 2–3 отзыва/мес · Рейтинг 2ГИС ≥ 4.7★ за 6 мес</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 3 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">3</div>
+          <div class="auto-scenario-title">UTM-атрибуция — знать, какой канал реально даёт деньги</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: клик по любой внешней ссылке</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Сейчас невозможно понять, откуда приходят клиенты. UTM-разметка на все ссылки + цели в Яндекс.Метрике + источник в Битрикс24 дают сквозную картину: от первого касания до выигранного дела.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Клиент кликает ссылку (2ГИС / Авито / Telegram / VK / рассылка)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">UTM-параметры в URL: ?utm_source=2gis&amp;utm_medium=maps&amp;utm_campaign=b2b</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Яндекс.Метрика фиксирует визит + цель «Отправил форму»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Битрикс24 сохраняет источник в поле сделки автоматически</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Отчёт: «2ГИС → 12 заявок · Авито → 5 · Telegram → 3» за месяц</div>
+            </div>
+          </div>
+
+          <table class="data-table" style="margin-top: 14px">
+            <thead>
+              <tr>
+                <th>Канал</th>
+                <th>UTM-шаблон ссылки</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2ГИС</td><td style="font-family:monospace;font-size:11.5px">glc-reputation.ru?utm_source=2gis&amp;utm_medium=maps&amp;utm_campaign=b2b</td></tr>
+              <tr><td>Авито</td><td style="font-family:monospace;font-size:11.5px">glc-reputation.ru?utm_source=avito&amp;utm_medium=classifieds&amp;utm_campaign=b2b</td></tr>
+              <tr><td>Telegram</td><td style="font-family:monospace;font-size:11.5px">glc-reputation.ru?utm_source=telegram&amp;utm_medium=social&amp;utm_campaign=content</td></tr>
+              <tr><td>VK</td><td style="font-family:monospace;font-size:11.5px">glc-reputation.ru?utm_source=vk&amp;utm_medium=social&amp;utm_campaign=b2b</td></tr>
+            </tbody>
+          </table>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Яндекс.Метрика + Битрикс24 + UTM-шаблоны</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 2–3 часа</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 100% заявок с известным источником · решения о бюджете на основе данных</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 4 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">4</div>
+          <div class="auto-scenario-title">Telegram-бот @One_make_bot — воронка заявки 24/7</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: /start или входящее сообщение</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Бот существует, но, вероятно, не замкнут на Битрикс24 и не квалифицирует клиента. Полная воронка: приветствие → квалификация → сбор контакта → автоматическая сделка в CRM → уведомление менеджеру.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Пользователь пишет в @One_make_bot</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Приветствие + меню: «Юридическая консультация / Взыскание долга / Арбитраж / Другое»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Квалификация: «Вы физлицо или компания?» → направляет по нужной ветке</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Сбор контакта: «Оставьте телефон — перезвоним за 15 минут»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Webhook → Битрикс24: новая сделка с тегом «Telegram», квалификация сохранена</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Менеджер получает уведомление с контекстом. Клиент ждёт звонка, а не тишины.</div>
+            </div>
+          </div>
+
+          <div class="alert info" style="margin: 12px 0 10px">
+            <strong>Дополнительно:</strong> Бот автоматически отправляет кейс по теме («Взыскание долга? Вот как мы получили 2,3 млн для ИП…»), пока клиент ждёт звонка. Это прогревает и снижает отказы.
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Telegram Bot API + Битрикс24 Открытые линии + Webhook</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 2–3 дня</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 5+ квалифицированных заявок через бот / мес</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 5 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">5</div>
+          <div class="auto-scenario-title">Реактивация базы — вернуть «спящих» клиентов с B2B-оффером</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: клиент без активности &gt; 6 мес</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">За 8 лет у ГПК «Репутация» накоплена база закрытых дел. Большинство клиентов — физлица, но среди них есть ИП и малый бизнес, которому может понадобиться сопровождение сейчас. Один персонализированный сегмент — один оффер — один звонок.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Сегментация: закрытые сделки за 2022–2024, нет активности &gt; 6 мес</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Фильтр: ИП / юрлица в базе → выгрузка в список «Реактивация B2B»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Персонализированное SMS или Telegram: «{Имя}, рады снова помочь. Сейчас ведём B2B-дела: [краткий оффер]»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Реакция → юрист перезванивает. Нет реакции → звонок через 3 дня с коротким скриптом</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">5–10% конверсия: 1–2 новые сделки из каждых 20 контактов без затрат на рекламу</div>
+            </div>
+          </div>
+
+          <div class="alert warn" style="margin: 12px 0 10px">
+            <strong>Важно:</strong> перед рассылкой проверить согласие на обработку ПД (152-ФЗ). Клиенты, давшие согласие при оформлении дела — можно. Остальных — только звонок, без рассылки.
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 CRM-маркетинг + SMS-провайдер</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 1 неделя (включая сегментацию)</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 1–2 сделки на каждые 20 реактивированных контактов</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 6 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">6</div>
+          <div class="auto-scenario-title">Автосбор документов — клиент сам загружает нужное через чек-лист</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: сделка переведена в «Сбор документов»</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Собственник отметил: от мгновенной покупки останавливает <strong>время сбора документов</strong>. Если автоматизировать этот этап — уменьшится «подвисание» клиента и сократится цикл сделки.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Юрист переводит сделку в «Сбор документов» в Битрикс24</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Автоматически отправляется персонализированный чек-лист (Telegram / WhatsApp / email) по типу спора</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Клиент загружает файлы через ссылку (Битрикс24 диск или форма)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Если нет загрузки 48 ч → автонапоминание: «Не забудьте прикрепить документы»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Юрист получает уведомление «Документы загружены» и сразу начинает анализ</div>
+            </div>
+          </div>
+          <div class="alert info" style="margin: 12px 0 10px">
+            <strong>Примеры чек-листов по типу спора:</strong> «Взыскание долга по договору поставки» → договор, спецификации, ТТН, акты, деловая переписка, претензия (если есть). Разные шаблоны для разных категорий споров.
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 Роботы + Диск + Telegram/WhatsApp</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 3–5 дней (написание чек-листов + настройка роботов)</span>
+            <span class="auto-meta-tag kpi">📊 KPI: сокращение цикла сделки на 2–3 дня · меньше «зависших» клиентов</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 7 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">7</div>
+          <div class="auto-scenario-title">Автоинформирование клиента о ходе дела — ключ к удовлетворённости</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: смена статуса дела в Битрикс24</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Собственник назвал это <strong>ключевым моментом в работе с клиентами</strong>: «держать клиента в курсе событий — что его вопросом занимаются». Недовольные клиенты — это прежде всего те, кому мало давали обратной связи. Автоматизация снимает эту проблему без ручных усилий юриста.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Юрист меняет стадию дела (претензия → суд → решение → исполнение)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Битрикс24 Робот автоматически отправляет сообщение клиенту в Telegram/WhatsApp</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Шаблон: «{Имя}, ваше дело перешло на этап [претензионного порядка / суда / исполнения]. Следующий шаг — [описание]. Вопросы? Пишите!»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Раз в 2 недели — авто «heartbeat»: «Ваше дело в работе, идём по плану»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">Клиент чувствует контроль и заботу · Возражений и тревожных звонков меньше</div>
+            </div>
+          </div>
+          <table class="data-table" style="margin-top:14px">
+            <thead>
+              <tr><th>Этап дела</th><th>Шаблон сообщения</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Документы получены</td><td>«{Имя}, документы получили. Анализируем — ответим в течение 1–2 рабочих дней.»</td></tr>
+              <tr><td>Претензия отправлена</td><td>«Претензия направлена контрагенту. Ожидаем ответ в течение 30 дней.»</td></tr>
+              <tr><td>Иск подан в суд</td><td>«Иск подан в арбитражный суд. Сообщим о дате заседания.»</td></tr>
+              <tr><td>Решение суда</td><td>«Суд вынес решение по вашему делу. Юрист свяжется сегодня.»</td></tr>
+              <tr><td>Исполнительный лист получен</td><td>«Исполнительный лист на руках — начинаем взыскание.»</td></tr>
+            </tbody>
+          </table>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 Роботы + Telegram / WhatsApp Business</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 2–3 дня (написание шаблонов + настройка роботов по стадиям)</span>
+            <span class="auto-meta-tag kpi">📊 KPI: снижение «тревожных» звонков клиентов · рост NPS · больше отзывов с упоминанием коммуникации</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Сценарий 8 -->
+      <div class="auto-scenario">
+        <div class="auto-scenario-hdr">
+          <div class="auto-scenario-num">8</div>
+          <div class="auto-scenario-title">Автораздача лид-магнита — «Как проверить контрагента» без участия юриста</div>
+          <div class="auto-scenario-trigger">⚡ Триггер: запрос литмагнита с сайта / бота / рекламы</div>
+        </div>
+        <div class="auto-scenario-body">
+          <p style="margin-bottom:12px">Владелец упомянул готовый литмагнит — «Правила проверки контрагентов». Это идеальный инструмент для B2B-сегмента: предприниматель скачивает, читает, начинает доверять экспертизе компании. Полная автоматизация без ручных отправок.</p>
+          <div class="auto-flow">
+            <div class="auto-step">
+              <div class="auto-step-box trigger-box">Клик на кнопку «Скачать бесплатный чек-лист» (сайт / реклама / TenChat / бот)</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Форма: имя + телефон/Telegram. Согласие с обработкой ПД.</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Мгновенно → PDF на email + ссылка в Telegram/WhatsApp. Контакт создаётся в Битрикс24 как «Лид (литмагнит)».</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box action-box">Через 3 дня: «{Имя}, изучили чек-лист? Если хотите — бесплатно проверим ваших контрагентов»</div>
+            </div>
+            <div class="auto-step-arrow">→</div>
+            <div class="auto-step">
+              <div class="auto-step-box outcome-box">10–20% скачавших → записываются на консультацию. Тёплый лид уже знает компанию.</div>
+            </div>
+          </div>
+          <div class="auto-scenario-meta">
+            <span class="auto-meta-tag tool">🛠 Битрикс24 CRM-форма + Telegram Bot / Email</span>
+            <span class="auto-meta-tag time">⏱ Настройка: 1 день (форма + робот + шаблон PDF уже есть)</span>
+            <span class="auto-meta-tag kpi">📊 KPI: 20–30 скачиваний/мес через рекламные каналы → 3–5 консультаций → 1–2 сделки</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /auto-scenarios -->
+
+    <!-- Automation stack -->
+    <h2>🧰 Стек инструментов автоматизации</h2>
+    <div class="auto-stack">
+      <table class="data-table" style="margin: 0; border-radius: 0; box-shadow: none;">
+        <thead>
+          <tr>
+            <th>Задача</th>
+            <th>Инструмент</th>
+            <th>Стоимость</th>
+            <th>Сложность</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Единая CRM-воронка, роботы, уведомления</td>
+            <td><strong>Битрикс24</strong></td>
+            <td>Уже оплачен</td>
+            <td><span class="pill ok">Низкая</span></td>
+          </tr>
+          <tr>
+            <td>Telegram-бот, приём заявок</td>
+            <td><strong>Telegram Bot API + aiogram / Открытые линии Б24</strong></td>
+            <td>Бесплатно</td>
+            <td><span class="pill warn">Средняя</span></td>
+          </tr>
+          <tr>
+            <td>UTM-разметка, цели, воронки</td>
+            <td><strong>Яндекс.Метрика</strong></td>
+            <td>Бесплатно</td>
+            <td><span class="pill ok">Низкая</span></td>
+          </tr>
+          <tr>
+            <td>SMS и WhatsApp для отзывов / реактивации</td>
+            <td><strong>SMS.ru / SMSC / WhatsApp Business</strong></td>
+            <td>~3–5 ₽/сообщение</td>
+            <td><span class="pill ok">Низкая</span></td>
+          </tr>
+          <tr>
+            <td>Контент-план и расписание постов</td>
+            <td><strong>SMMplanner или Postmypost</strong></td>
+            <td>~500 ₽/мес</td>
+            <td><span class="pill ok">Низкая</span></td>
+          </tr>
+          <tr>
+            <td>Сложная автоматизация между сервисами</td>
+            <td><strong>n8n (self-hosted) или Make.com</strong></td>
+            <td>Бесплатно / от 9 $/мес</td>
+            <td><span class="pill warn">Средняя</span></td>
+          </tr>
+          <tr>
+            <td>ИИ-черновики постов и ответов на отзывы</td>
+            <td><strong>YandexGPT / GigaChat</strong></td>
+            <td>Тариф РФ</td>
+            <td><span class="pill ok">Низкая</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert info" style="margin-top: 20px">
+      <strong>Рекомендуемая последовательность:</strong> Сначала сценарии 1 и 3 (маршрутизация + UTM) — они дают аналитику и устраняют потери. Затем сценарий 2 (отзывы) — быстрый результат для репутации. Сценарии 4 и 5 — во второй волне, когда базовая автоматизация работает.
+    </div>
+
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ ДОРОЖНАЯ КАРТА ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Дорожная карта</span>
+    <span class="sec-header-title">Приоритеты внедрения</span>
+  </div>
+  <div class="content">
+    <p style="margin-bottom: 20px">Действия распределены по трём приоритетам. Начинай с красной колонки — эти шаги устранят главные потери и дадут первый измеримый результат.</p>
+
+    <div class="roadmap-board">
+
+      <!-- Колонка 1: Высокий приоритет -->
+      <div class="roadmap-col col-red">
+        <div class="roadmap-col-header">
+          <span class="roadmap-col-icon">🔴</span>
+          <span class="roadmap-col-title">Высокий приоритет</span>
+          <span class="roadmap-col-count">7 задач</span>
+        </div>
+        <div class="roadmap-col-body">
+
+          <div class="rm-card">
+            <div class="rm-card-title">Аудит Битрикс24 + подключить все каналы</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">CRM</span>
+              <span class="rm-tag effort">⏱ 1–2 дня</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> устраняет потери лидов из всех каналов</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Лендинг для B2B + кейсы + FAQ</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Сайт</span>
+              <span class="rm-tag effort">⏱ 2–3 нед.</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> конверсия сайта +30–50%</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Автоответ на заявку &lt; 2 мин</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Битрикс24</span>
+              <span class="rm-tag effort">⏱ 1 день</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> меньше потерь на первом контакте</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Система сбора отзывов → 2ГИС</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">2ГИС + CRM</span>
+              <span class="rm-tag effort">⏱ 1 день</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> рост рейтинга и доверия</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Авито: B2B-объявления с ценами</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Авито</span>
+              <span class="rm-tag effort">⏱ 2–3 дня</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> быстрый трафик от МСБ</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Автоинформирование клиента о ходе дела</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Битрикс24</span>
+              <span class="rm-tag effort">⏱ 2–3 дня</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> меньше тревожных звонков · рост NPS</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Автосбор документов через чек-лист</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Битрикс24</span>
+              <span class="rm-tag effort">⏱ 3–5 дней</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> короче цикл сделки · меньше «подвисших»</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Колонка 2: Средний приоритет -->
+      <div class="roadmap-col col-amber">
+        <div class="roadmap-col-header">
+          <span class="roadmap-col-icon">🟡</span>
+          <span class="roadmap-col-title">Средний приоритет</span>
+          <span class="roadmap-col-count">4 задачи</span>
+        </div>
+        <div class="roadmap-col-body">
+
+          <div class="rm-card">
+            <div class="rm-card-title">UTM-разметка всех каналов</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Аналитика</span>
+              <span class="rm-tag effort">⏱ 1 день</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> прозрачность: что реально работает</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Перезапуск Telegram под B2B</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Telegram</span>
+              <span class="rm-tag effort">⏱ 1–2 нед.</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> прогрев аудитории долгосрочно</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">VK: создать бизнес-страницу компании</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">VK</span>
+              <span class="rm-tag effort">⏱ 2–3 дня</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> подключается к Открытым линиям Битрикс24</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Литмагнит: автораздача PDF «Проверка контрагентов»</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">CRM + Telegram</span>
+              <span class="rm-tag effort">⏱ 1 день</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> тёплые лиды из рекламы без звонка юриста</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Колонка 3: Низкий приоритет -->
+      <div class="roadmap-col col-green">
+        <div class="roadmap-col-header">
+          <span class="roadmap-col-icon">🟢</span>
+          <span class="roadmap-col-title">Низкий приоритет</span>
+          <span class="roadmap-col-count">2 задачи</span>
+        </div>
+        <div class="roadmap-col-body">
+
+          <div class="rm-card">
+            <div class="rm-card-title">Корпоративный email @glc-reputation.ru</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Сайт</span>
+              <span class="rm-tag effort">⏱ 1 день</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> повышает доверие у B2B-аудитории</div>
+          </div>
+
+          <div class="rm-card">
+            <div class="rm-card-title">Реактивация клиентской базы CRM</div>
+            <div class="rm-card-meta">
+              <span class="rm-tag channel">Битрикс24</span>
+              <span class="rm-tag effort">⏱ 1 нед.</span>
+            </div>
+            <div class="rm-card-effect"><strong>Эффект:</strong> повторные продажи без рекламных затрат</div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- ══════════════ ИТОГИ ══════════════ -->
+  <div class="sec-header">
+    <span class="sec-header-num">Итоги</span>
+    <span class="sec-header-title">Выводы и три рычага роста</span>
+  </div>
+  <div class="content">
+
+    <!-- Блок ключевых фактов доверия из брифа -->
+    <div style="background:linear-gradient(135deg,#0f2544,#1a3a6b);border-radius:16px;padding:24px 28px;margin-bottom:28px;color:#fff">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.5);margin-bottom:16px">КЛЮЧЕВЫЕ ФАКТЫ ДОВЕРИЯ — ОБЯЗАТЕЛЬНО НА САЙТЕ И ВО ВСЕХ КАНАЛАХ</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+        <div style="text-align:center;background:rgba(255,255,255,.07);border-radius:10px;padding:16px 12px">
+          <div style="font-size:28px;font-weight:900;color:#60a5fa;line-height:1">1 млрд+</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">рублей взыскано<br>для клиентов</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,.07);border-radius:10px;padding:16px 12px">
+          <div style="font-size:28px;font-weight:900;color:#4ade80;line-height:1">20+ лет</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">юридического<br>опыта учредителя</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,.07);border-radius:10px;padding:16px 12px">
+          <div style="font-size:28px;font-weight:900;color:#fb923c;line-height:1">200+</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">клиентов<br>с 2017 года</div>
+        </div>
+        <div style="text-align:center;background:rgba(255,255,255,.07);border-radius:10px;padding:16px 12px">
+          <div style="font-size:28px;font-weight:900;color:#e879f9;line-height:1">4.8 ★</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px">рейтинг 2ГИС<br>25 отзывов</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;font-size:12.5px;color:rgba(255,255,255,.55);border-top:1px solid rgba(255,255,255,.1);padding-top:12px">
+        <strong style="color:rgba(255,255,255,.8)">Доп. факты из брифа:</strong> Член Ассоциации юристов России · Участник профессиональных конференций · 10+ лет специализации на взыскании долгов · Все специалисты дипломированные · Офис рядом с арбитражным судом Екатеринбурга
+      </div>
+    </div>
+
+    <div class="concl-grid">
+      <div class="concl-card good">
+        <div class="concl-card-header">✅ Сильные стороны</div>
+        <div class="concl-card-body">
+          <div class="concl-item"><span class="concl-item-icon">✓</span>Битрикс24 — платформа для автоматизации уже есть</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>Telegram-бот @One_make_bot — инструмент захвата заявок 24/7</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>9 лет работы и 1 млрд+ взысканных рублей — сильное социальное доказательство</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>2ГИС: рейтинг 4.8★ / 25 отзывов — выше многих конкурентов</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>TenChat: активный профиль с качественным B2B-контентом</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>Рассрочка до 6 мес — ценное УТП для МСБ, нужно вынести в акцент</div>
+          <div class="concl-item"><span class="concl-item-icon">✓</span>Готовый литмагнит «Проверка контрагентов» — не используется для лидогенерации</div>
+        </div>
+      </div>
+
+      <div class="concl-card bad">
+        <div class="concl-card-header">❌ Критические проблемы</div>
+        <div class="concl-card-body">
+          <div class="concl-item"><span class="concl-item-icon">✗</span>Сайт не конвертирует B2B: нет цен, кейсов, FAQ</div>
+          <div class="concl-item"><span class="concl-item-icon">✗</span>Воронка прогрева отсутствует — все 5 этапов слабые</div>
+          <div class="concl-item"><span class="concl-item-icon">✗</span>Отзывы устарели (2020–2023), нет системы автосбора</div>
+          <div class="concl-item"><span class="concl-item-icon">✗</span>Битрикс24 вероятно не используется в полную силу</div>
+          <div class="concl-item"><span class="concl-item-icon">✗</span>Позиционирование смешанное — ни B2B, ни B2C не чувствуют «это для меня»</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Три рычага для удвоения выручки</h2>
+
+    <div class="levers-grid">
+      <div class="lever-card">
+        <div class="lever-num">01</div>
+        <div class="lever-title">Переупаковка под B2B</div>
+        <div class="lever-desc">Лендинг, кейсы, цены-ориентиры, FAQ — чтобы клиент не уходил с сайта без заявки. Самое прямое влияние на конверсию.</div>
+        <div class="lever-horizon">Горизонт: 1–3 месяца</div>
+      </div>
+      <div class="lever-card">
+        <div class="lever-num">02</div>
+        <div class="lever-title">Автоматизация первого контакта</div>
+        <div class="lever-desc">Битрикс24, UTM, бот — ни одна заявка не теряется, скорость ответа &lt; 2 мин. Первый, кто ответил, получает клиента.</div>
+        <div class="lever-horizon">Горизонт: 1–2 недели</div>
+      </div>
+      <div class="lever-card">
+        <div class="lever-num">03</div>
+        <div class="lever-title">Системный рост доверия</div>
+        <div class="lever-desc">Отзывы 2ГИС, контент в Telegram, кейсы на сайте — воронка прогрева работает автоматически и без ручного управления.</div>
+        <div class="lever-horizon">Горизонт: 3–6 месяцев</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <div class="report-footer">
+    <div class="footer-note">
+      Данные собраны из публичных источников в соответствии с открытым доступом платформ на дату анализа (02.04.2026). Персональные данные авторов отзывов не собирались и не хранятся. Выводы об эффективности каналов носят ориентировочный характер — для точных данных необходим доступ к Яндекс.Метрике и Битрикс24.
+    </div>
+    <div class="footer-badge">
+      <div class="footer-badge-name">ГПК «Репутация»</div>
+      <div class="footer-badge-meta">Методология research.md v2.0</div>
+      <div class="footer-badge-meta">Екатеринбург · 02.04.2026</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
